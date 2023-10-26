@@ -1,0 +1,26 @@
+@import "../utils/styles/base";
+
+@import "./components/style/app";
+
+.apps {
+  position: relative;
+
+  background: url("../../img/cevaidksimcer.png");
+  background-repeat: repeat;
+  background-size: contain;
+  background-position: top;
+}
+
+@media screen and (max-width: 400px) {
+  .apps {
+    .app {
+      .linie_sep {
+        height: 10px;
+        width: 70vw;
+      }
+      .top {
+        padding: 10px;
+      }
+    }
+  }
+}
