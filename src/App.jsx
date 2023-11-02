@@ -174,26 +174,9 @@ function App() {
         <Route path="/blog" element={<Blog blog={blog} />} />
         <Route path="/blog/:id" element={<BlogPost />} />
         <Route path="/despre" element={<Despre />} />
-        <Route path="/apps" element={<Apps apps={apps} />} />
-        <Route path="/download" element={<Apps />} />
         <Route path="/team" element={<Alumni ani={ani} alumni={alumni} />} />
         <Route path="/sponsors" element={<Sponsors spon={spon} />} />
-        <Route
-          path="/shop/:categorie/:sort_param?/:price?"
-          element={<Shop addit={addit} />}
-        />
-        <Route
-          path="/cart"
-          element={
-            <Cart
-              delete_prod_app={delete_prod_app}
-              update={update}
-              finish={finish}
-              fixCant={fixCant}
-            />
-          }
-        />
-        <Route path="/prod/:id" element={<ProductPage addit={addit} />} />
+
         <Route path="/admin" element={<AdminPages isAllowed={isAllowed} />}>
           <Route path="/admin/" element={<Index />} />
           <Route path="/admin/tasks" element={<Crm taskss={tasks} />} />

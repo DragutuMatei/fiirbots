@@ -53,14 +53,14 @@ function Home({ premii }) {
           <h2 data-aos="fade-right" data-aos-delay="300">
             we are
           </h2>
-          <h1 data-aos="fade-right">thobor</h1>
+          <h1 data-aos="fade-right">FIIRBOTS</h1>
           <h2 data-aos="fade-right" data-aos-delay="300">
             team
           </h2>
         </div>
-        <div className="img" data-aos="fade-left">
+        {/* <div className="img" data-aos="fade-left">
           <LazyLoadImage src={main} alt="main" width="100%" height="100%" />
-        </div>
+        </div> */}
       </div>
       <div className="cifre">
         <div className="custom-shape-divider-bottom-1669758197">
@@ -87,7 +87,7 @@ function Home({ premii }) {
           </svg>
         </div>
         <h3 data-aos="fade-down">
-          <b>THOBOR</b> in cifre:
+          <b>FIIRBOTS</b> in cifre:
         </h3>
         <div className="tab" data-aos="fade-down">
           <div className="linie">
@@ -193,11 +193,10 @@ function Home({ premii }) {
         <h1 ref={h1}>Despre</h1>
         <h2 data-aos="zoom-in-up">Despre</h2>
         <p data-aos="zoom-in-up">
-          Echipa de robotică, formată din 15 liceeni ai Colegiului Național
-          “Calistrat Hogaș” Tecuci, alături de mentori, îndrăznim să visăm.
-          Plecată dintr-o zonă fără tradiții în domeniu, echipa și-a propus să
-          aducă în comunitate o idee nouă, care să-i inspire pe toți colegii,
-          care să deschidă noi direcții de evoluție pentru copii.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. In earum
+          facilis, exercitationem quisquam quos asperiores nisi quia vitae
+          repellendus mollitia dolorem doloribus accusantium, odit neque, natus
+          commodi ex rerum consequatur!
         </p>
         <Link to={"/despre"} className="button" data-aos="zoom-in-up">
           afla mai multe
@@ -217,16 +216,16 @@ function Home({ premii }) {
           />
           <h1>programming</h1>
         </div>
-        <div className="card" data-aos="fade-right" data-aos-delay="400">
+        {/* <div className="card" data-aos="fade-right" data-aos-delay="400">
           <LazyLoadImage src={marketing} alt="main" width={100} height="auto" />
           <h1>marketing</h1>
-        </div>
+        </div> */}
         <div className="card" data-aos="fade-right" data-aos-delay="600">
           <LazyLoadImage src={control} alt="main" width={100} height="auto" />
           <h1>Mechanics</h1>
         </div>
       </div>
-      <div className="scrollcnt">
+      {/* <div className="scrollcnt">
         <div className="loc_de_premii">
           <h1>Premii</h1>
           <div className="coca"></div>
@@ -242,7 +241,7 @@ function Home({ premii }) {
               ))}
           </div>
         </ScrollContainer>
-      </div>
+      </div> */}
 
       <div className="al">
         <Svg />

@@ -69,7 +69,7 @@
         }
         .prod {
           padding: 20px;
-          border-bottom: 5px solid $light_green;
+          border-bottom: 5px solid $kinda_blue;
           margin-bottom: 20px;
           .buttons {
             margin: 15px 0;
@@ -80,7 +80,7 @@
             a button {
               border: none;
               cursor: pointer;
-              background: $main_green;
+              background: $green;
               color: white;
               padding: 0.25rem 0.5rem;
               font-size: 0.875rem;
@@ -190,13 +190,13 @@
     font-size: 30px;
     color: white;
     span {
-      color: $main_green;
+      color: $green;
       font-weight: bold;
     }
   }
   h2 {
     font-size: 20px;
-    color: $light_green;
+    color: $kinda_blue;
     margin-top: 20px;
     cursor: pointer;
   }
@@ -213,7 +213,7 @@
     margin-top: 50px;
 
     thead {
-      background: $main_green;
+      background: $green;
 
       tr {
         border-bottom: 30px solid $black2;
@@ -281,7 +281,7 @@
       left: 50%;
       width: 200px;
       height: 20px;
-      background-color: $main_green;
+      background-color: $green;
     }
   }
   .hour {
@@ -292,7 +292,7 @@
     align-items: center;
     position: relative;
 
-    hr{
+    hr {
       margin: 20px;
     }
     .ll,
@@ -308,16 +308,16 @@
     }
     .ll {
       height: 100%;
-      h1{
+      h1 {
         font-size: 25px;
         color: $yellow;
         font-weight: 800;
         width: 100%;
-        margin-bottom: 20px ;
+        margin-bottom: 20px;
       }
       h4 {
         span {
-          color: $light_green;
+          color: $kinda_blue;
           font-weight: 900;
         }
       }

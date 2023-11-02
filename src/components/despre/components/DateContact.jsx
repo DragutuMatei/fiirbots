@@ -13,19 +13,22 @@ function DateContact() {
       <div className="left">
         <div className="title">
           <h1 data-aos="fade-down">
-            Suntem de la <span>Colegiul Național "Calistrat Hogaș"</span>
+            Suntem de la{" "}
+            <span>Facultatea de Inginerie Industriala si Robotica</span>
           </h1>
           <div className="linie" data-aos="fade-right"></div>
         </div>
         <ul>
           <li data-aos="fade-right">
-            Strada Costache Racoviţă, nr.20, Tecuci, 805300
+            Splaiul Independentei 313, sector 6, cod postal 060042, Bucuresti,
+            corp CD 003
           </li>
           <li data-aos="fade-right">
-            <a href="tel: 0236/820010">0236/820010</a>
+            <a href="tel: 40214029302">40 21-402 93 02</a>
           </li>
           <li data-aos="fade-right">
-            <a href="mailto:lchogas@yahoo.com">lchogas@yahoo.com</a>
+            <a href="mailto:secretariat@fiir.pub.ro">secretariat@fiir.pub.ro</a>
+            <a href="mailto:decanat@fiir.pub.ro">decanat@fiir.pub.ro</a>
           </li>
         </ul>
       </div>

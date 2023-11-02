@@ -53,7 +53,7 @@ function Navbar() {
   return (
     <section className="navigation">
       <div className="nav-container">
-        <div className="brand">
+        {/* <div className="brand">
           <Link to="/">
             <LazyLoadImage
               src={logo}
@@ -63,7 +63,7 @@ function Navbar() {
               alt="logo"
             />
           </Link>
-        </div>
+        </div> */}
         <nav>
           <div className="nav-mobile">
             <a id="nav-toggle" href="#!" onClick={nav_click} ref={nav}>
@@ -81,52 +81,11 @@ function Navbar() {
               <Link to="/despre">Despre</Link>
             </li>
             <li>
-              <Link to="/shop/all">Shop</Link>
-            </li>
-            <li>
-              <Link to="/apps">Apps</Link>
-            </li>
-            <li>
               <Link to="/team">Team</Link>
             </li>
             <li>
               <Link to="/sponsors">Sponsors</Link>
             </li>
-            {!isMobile && size.width > 700 && (
-              <>
-                <li>
-                  <a target="_blank" href="https://sumulator.netlify.app">
-                    Simulator
-                  </a>
-                </li>
-                <li>
-                  <a target="_blank" href="https://robotsez6.netlify.app">
-                    Robotul din sezonul 6
-                  </a>
-                </li>
-              </>
-            )}
-
-            {!loading && !user ? (
-              <>
-                <li>
-                  <a href="#" onClick={signInWithGoogle}>
-                    Login
-                  </a>
-                </li>
-              </>
-            ) : (
-              <>
-                <li>
-                  <a href="#">{user && user.displayName}</a>
-                </li>
-                <li>
-                  <a href="#" onClick={logout}>
-                    Logout
-                  </a>
-                </li>
-              </>
-            )}
           </ul>
         </nav>
       </div>

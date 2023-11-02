@@ -39,7 +39,7 @@ function Despre() {
               data-aos="fade-right"
               data-aos-delay={window.innerWidth > 700 ? 600 : 0}
             >
-              Despre Thobor
+              Despre FIIRBOTS
             </h1>
             <div
               data-aos="fade-right"
@@ -48,23 +48,25 @@ function Despre() {
             ></div>
           </div>
           <p data-aos-delay="700" data-aos="fade-down">
-            Echipa THOBOR a Colegiului Național “Calistrat Hogaş” Tecuci, este
-            formată din șaisprezece liceeni si doi mentori care au îndrăznit să
-            viseze. Plecată dintr-o zonă fără tradiții în domeniu, echipa și-a
-            propus să aducă în comunitate o idee nouă, care să-i inspire pe toți
-            colegii, care să deschidă noi direcții de evoluție pentru copii.
-            Echipa are deja o vechime de {new Date().getFullYear() - 2017} ani
-            și pe parcursul acestor ani am învățat că First este ca o călătorie,
-            o călătorie pe care ai putea să o oprești în orice moment dar care
-            te motivează continuu să mergi mai departe, să încerci mai mult și
-            să te dedici și mai mult.
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum
+            sapiente ut quae iure assumenda, aliquid obcaecati nisi amet,
+            suscipit ullam laudantium fugiat temporibus a. Veniam officia
+            voluptates suscipit eos, minus autem dolorum quas sit a, aut
+            provident. Sint modi iusto possimus impedit accusantium
+            exercitationem voluptatum natus nisi repudiandae, ducimus, qui
+            doloribus corrupti doloremque unde vitae veritatis autem at velit!
+            Unde veniam nulla nemo saepe, provident, sequi architecto asperiores
+            eius laboriosam eos, obcaecati suscipit. Eum a quidem minus
+            accusantium voluptatibus eos architecto, cum repellat assumenda
+            soluta maiores placeat deleniti illum voluptatem tenetur eligendi
+            reprehenderit itaque laudantium aperiam alias molestias ut.
           </p>
         </div>
       </div>
 
-      <Stem />
+      {/* <Stem /> */}
       <DateContact />
-      <Svg/>
+      <Svg />
       <Contact />
       <Up />
     </>

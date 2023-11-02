@@ -38,7 +38,7 @@
       z-index: 1;
       left: 50%;
       width: 200px;
-      background-color: $main_green;
+      background-color: $green;
     }
   }
 }
@@ -60,7 +60,7 @@
     h2 {
       font-size: 20px;
       span {
-        color: $main_green;
+        color: $green;
       }
     }
   }
@@ -70,16 +70,16 @@
     flex-direction: column;
     align-items: flex-start;
 
-    .obs{
-        margin: 20px 15px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    .obs {
+      margin: 20px 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-        h3{
-            font-size: 20px;
-            color: #dc3545;
-        }
+      h3 {
+        font-size: 20px;
+        color: #dc3545;
+      }
     }
 
     .inputs {
@@ -119,7 +119,7 @@
     h2 {
       margin: 10px 0;
       span {
-        color: $main_green;
+        color: $green;
       }
     }
     .buttons {
@@ -132,14 +132,14 @@
 
       a {
         font-size: 17px;
-        color: $main_green;
+        color: $green;
         font-weight: 500;
         margin: 0 10px;
       }
       button {
         color: white;
         border: 4px solid white;
-        background: $main_green;
+        background: $green;
         padding: 9px 13px;
         margin: 0 10px;
         outline: none;

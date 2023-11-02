@@ -43,10 +43,10 @@ const Incercare = (props) => {
         value: windowSize.width > 900 ? 150 : 40,
       },
       color: {
-        value: "#146622",
+        value: "#698C82",
       },
       links: {
-        color: "#26b33e",
+        color: "#1B7771",
         enable: true,
         distance: 150,
       },

@@ -53,7 +53,7 @@
     h1 {
       font-size: 80px;
       font-family: $font_mont;
-      color: $main_green;
+      color: $green;
     }
     h2 {
       font-size: 55px;
@@ -140,7 +140,7 @@
           span {
             font-weight: 400;
           }
-          color: $main_green;
+          color: $green;
           margin-bottom: 15px;
         }
 
@@ -192,11 +192,11 @@
   width: 100vw;
   position: relative;
   min-height: 800px;
-  background: url(../../img/thobor_team.png) !important;
-  background-position: center center!important;
-  background-repeat: no-repeat!important;
-  background-size: cover!important;
-  background-attachment: fixed!important;
+  background: url("../../img/about.jpg") !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  background-attachment: fixed !important;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -224,7 +224,7 @@
     left: -250px;
     font-weight: 900;
     font-family: $font_anek !important;
-    color: rgba($main_green, 0.8);
+    color: rgba($green, 0.8);
   }
   h2,
   p {
@@ -319,7 +319,7 @@
 
     h1 {
       font-size: 30px;
-      color: $black2;
+      color: #1B7771;
       font-weight: 500;
       margin: 10px;
     }
@@ -335,7 +335,7 @@
   width: auto;
   padding: 15px 25px;
   border-radius: 15px;
-  background: $main_green;
+  background: $green;
   color: white;
   font-size: 25px;
   user-select: none;
@@ -370,11 +370,7 @@
 .member {
   margin: 1.5em 0 0.5em;
   padding: 0.73em;
-  background: linear-gradient(
-    83deg,
-    $main_green 0 97%,
-    #fff0 calc(97% + 1px) 100%
-  );
+  background: linear-gradient(83deg, $green 0 97%, #fff0 calc(97% + 1px) 100%);
   position: relative;
   list-style: none;
   display: inline-block;
@@ -385,11 +381,7 @@
 
 .member:nth-of-type(even) {
   text-align: right;
-  background: linear-gradient(
-    -83deg,
-    $main_green 0 97%,
-    #fff0 calc(97% + 1px) 100%
-  );
+  background: linear-gradient(-83deg, $green 0 97%, #fff0 calc(97% + 1px) 100%);
 }
 
 .thumb {
@@ -397,7 +389,7 @@
   height: 13vmin;
   float: left;
   margin-right: 1.25em;
-  background: linear-gradient(-86deg, $black2 0 70%, $main_green 0% 100%);
+  background: linear-gradient(-86deg, $black2 0 70%, $green 0% 100%);
   transform: rotate(-4deg);
   transition: all 0.4s ease 0s;
   border-radius: 0.25em;
@@ -460,7 +452,7 @@
     margin-top: -2.25em;
     left: 9vmin;
     padding: 0 10px;
-    color: $main_green;
+    color: $green;
     border-radius: 0.25em;
     font-size: 1.35em;
     transform-origin: left bottom;
@@ -486,7 +478,7 @@
   font-size: 0.75em;
   position: absolute;
   top: -1.5em;
-  background: $main_green;
+  background: $green;
   right: 4em;
   transform: rotate(3deg);
   padding: 0.35em 0.75em 0.5em;
@@ -505,7 +497,7 @@
   display: inline-block;
   margin: 0.5em 0 0 0;
   background: $black2;
-  color: $main_green;
+  color: $green;
   padding: 0.1em 0.5em 0.35em;
   border-radius: 0.5em;
   text-decoration: none;
@@ -514,7 +506,7 @@
 .description p a:hover {
   transition: all 0.4s ease 0s;
   color: $black2;
-  background: $main_green;
+  background: $green;
   font-weight: bold;
 }
 

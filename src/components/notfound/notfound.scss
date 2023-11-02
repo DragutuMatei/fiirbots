@@ -123,7 +123,7 @@
   margin: 15px auto;
   width: 100px;
   padding: 10px 15px;
-  border: 1px solid $main_green;
+  border: 1px solid $green;
   border-radius: 100px;
   font-weight: 400;
   display: block;
@@ -139,7 +139,7 @@
 }
 
 .btn-go-home:hover {
-  background-color: $main_green;
+  background-color: $green;
   color: #fff;
   transform: scale(1.05);
   box-shadow: 0px 20px 20px rgba(0, 0, 0, 0.1);
@@ -176,7 +176,6 @@
   top: 12%;
   left: 25%;
 }
-
 
 .object_astronaut {
   animation: rotate-astronaut 200s infinite linear both alternate;

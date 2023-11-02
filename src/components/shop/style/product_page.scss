@@ -12,7 +12,7 @@
   background-repeat: repeat;
   background-size: contain;
   background-position: top;
-  
+
   .top {
     width: 100vw;
     display: flex;
@@ -34,7 +34,7 @@
       .nume {
         position: relative;
         z-index: 3;
-        color: $main_green;
+        color: $green;
         font-size: 40px;
         font-weight: 600;
       }
@@ -56,7 +56,7 @@
           small {
             font-size: 15px;
             margin-left: 10px;
-            color: $light_green;
+            color: $kinda_blue;
           }
         }
       }
@@ -105,7 +105,7 @@
           border: none;
         }
         button {
-          background: $main_green;
+          background: $green;
           cursor: pointer;
 
           i {
@@ -159,7 +159,7 @@
         font-size: 19px;
 
         &:hover {
-          color: $light_green;
+          color: $kinda_blue;
         }
       }
     }
@@ -219,7 +219,7 @@
             margin: 20px 10px;
             color: white;
             span {
-              color: $main_green;
+              color: $green;
             }
           }
           p {
@@ -312,7 +312,7 @@
                 margin-bottom: 20px;
 
                 .ups {
-                display: flex;
+                  display: flex;
                   justify-content: space-around;
                   align-items: center;
 
@@ -357,7 +357,7 @@
     .tit {
       font-size: 40px;
       margin: 40px 0;
-      color: $light_green;
+      color: $kinda_blue;
     }
     .maps {
       display: flex;

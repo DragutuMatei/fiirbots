@@ -2,7 +2,7 @@
   width: auto;
   padding: 15px 25px;
   border-radius: 15px;
-  background: $main_green;
+  background: $green;
   color: white;
   display: flex;
   justify-content: center;
@@ -12,10 +12,10 @@
   cursor: pointer;
   margin: 20px;
   z-index: 9;
-  border: 5px solid $dark_green;
+  border: 5px solid $kinda_blue;
 
-  &,& *::first-letter{
+  &,
+  & *::first-letter {
     text-transform: capitalize;
   }
-
 }

@@ -5,7 +5,7 @@
   justify-content: space-between;
   align-items: flex-start;
   position: relative;
-  background: $main_green;
+  background: $green;
   flex-wrap: wrap;
 
   .left {
@@ -60,6 +60,6 @@
 
 @counter-style repeating-emoji {
   system: cyclic;
-  symbols: "🤖";  
+  symbols: "🤖";
   suffix: " ";
 }

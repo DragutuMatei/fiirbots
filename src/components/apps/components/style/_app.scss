@@ -50,7 +50,7 @@
         z-index: 5;
         height: 500px;
         object-fit: cover;
-        width: 100%; 
+        width: 100%;
       }
     }
 
@@ -77,7 +77,7 @@
           position: relative;
           width: 300px;
           height: 20px;
-          background: $main_green;
+          background: $green;
           left: 80px;
           bottom: 18px;
         }
@@ -93,7 +93,7 @@
           width: 30px;
           height: 200px;
           margin: 0 20px;
-          background: $main_green;
+          background: $green;
         }
         p {
           color: white;
@@ -107,13 +107,13 @@
     width: 50vw;
     height: 20px;
     position: relative;
-    background: $light_green;
+    background: $kinda_blue;
     margin: 20px 0 50px 50px;
   }
 }
 
-@media screen and (max-width:630px) {
-  .apps .app .img{
+@media screen and (max-width: 630px) {
+  .apps .app .img {
     margin: 0;
   }
 }

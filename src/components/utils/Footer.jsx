@@ -1,6 +1,6 @@
 import React from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import logo from "../../img/logo_thobor_celalalt.png";
+import logo from "../../img/logo.png";
 function Footer() {
   return (
     <footer className="footer">
@@ -28,15 +28,15 @@ function Footer() {
 
           <ul className="nav__ul">
             <li>
-              <a href="https://www.facebook.com/ThoborCNCH">Facebook</a>
+              <a href="#">Facebook</a>
             </li>
 
             <li>
-              <a href="https://www.instagram.com/thoborcnch/">Instagram</a>
+              <a href="#">Instagram</a>
             </li>
 
             <li>
-              <a href="https://www.youtube.com/@thobor7033">Youtube</a>
+              <a href="#">Youtube</a>
             </li>
           </ul>
         </li>
@@ -46,13 +46,13 @@ function Footer() {
 
           <ul className="nav__ul">
             <li>
-              <a href="https://www.privacypolicygenerator.info/live.php?token=cESMOyaUosqLvcU5YXQB3NrhQxQsKOB7">
+              <a href="#">
                 Privacy Policy
               </a>
             </li>
 
             <li>
-              <a href="https://www.termsofusegenerator.net/live.php?token=YG1POUZlIVZO7kZW3sRiuAblHWnY2uSS">
+              <a href="#">
                 Terms of Use
               </a>
             </li>
@@ -61,7 +61,7 @@ function Footer() {
       </ul>
 
       <div className="legal">
-        <p> Copyright &copy; 2022 Thobor #RO068 All rights reserved.</p>
+        <p> Copyright &copy; 2023 FIIRBOTS. All rights reserved.</p>
       </div>
     </footer>
   );

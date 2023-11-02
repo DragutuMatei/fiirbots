@@ -15,7 +15,7 @@ function Svg() {
           xmlns="http://www.w3.org/2000/svg"
           xmlnsXlink="http://www.w3.org/1999/xlink"
           viewBox="0 0 1536 368"
-          fill="#26b33e"
+          fill="#1B7771"
           shapeRendering="geometricPrecision"
           textRendering="geometricPrecision"
         >
@@ -152,14 +152,14 @@ function Svg() {
             />
           </g>
           <g id="eLpYCVJXrm620_to" transform="translate(645.371917,272.712772)">
-            <g id="eLpYCVJXrm620_tr" transform="rotate(0)">
+            <g id="eLpYCVJXrm620_tr" fill="#1B7771" transform="rotate(0)">
               <line
                 x1="11.70567"
                 y1="-11.287228"
                 x2="-0.571917"
                 y2="3.287228"
                 transform="translate(0,0)"
-                fill="#26b33e"
+                fill="#1B7771"
                 stroke="url(#eLpYCVJXrm620-stroke)"
                 strokeWidth="25"
                 strokeLinecap="round"
@@ -175,7 +175,7 @@ function Svg() {
                 x2="26.313969"
                 y2="2.649033"
                 transform="translate(0,0)"
-                fill="#26b33e"
+                fill="#1B7771"
                 stroke="url(#eLpYCVJXrm621-stroke)"
                 strokeWidth="25"
                 strokeLinecap="round"

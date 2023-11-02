@@ -15,7 +15,7 @@ function Contact() {
         </h1>
       </div>
       <a
-        href="mailto: thoborcnch@gmail.com"
+        href="mailto: mihailhanga@gmail.com"
         className="button"
         data-aos="zoom-in"
       >
