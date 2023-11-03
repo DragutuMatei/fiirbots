@@ -37,7 +37,7 @@ function Svg() {
               <stop
                 id="eLpYCVJXrm620-stroke-1"
                 offset="53%"
-                stopColor="#26b33e"
+                stopColor="#1B7771"
               />
             </radialGradient>
             <radialGradient
@@ -57,7 +57,7 @@ function Svg() {
               <stop
                 id="eLpYCVJXrm621-stroke-1"
                 offset="51.3282%"
-                stopColor="#26b33e"
+                stopColor="#1B7771"
               />
             </radialGradient>
           </defs>

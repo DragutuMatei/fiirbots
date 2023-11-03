@@ -171,13 +171,13 @@ function App() {
         link.includes("end")) && <Navbar />}
       <Routes>
         <Route path="/" element={<Home premii={premii} />} />
-        <Route path="/blog" element={<Blog blog={blog} />} />
-        <Route path="/blog/:id" element={<BlogPost />} />
+        {/* <Route path="/blog" element={<Blog blog={blog} />} />
+        <Route path="/blog/:id" element={<BlogPost />} /> */}
         <Route path="/despre" element={<Despre />} />
         <Route path="/team" element={<Alumni ani={ani} alumni={alumni} />} />
-        <Route path="/sponsors" element={<Sponsors spon={spon} />} />
+        {/* <Route path="/sponsors" element={<Sponsors spon={spon} />} /> */}
 
-        <Route path="/admin" element={<AdminPages isAllowed={isAllowed} />}>
+        {/* <Route path="/admin" element={<AdminPages isAllowed={isAllowed} />}>
           <Route path="/admin/" element={<Index />} />
           <Route path="/admin/tasks" element={<Crm taskss={tasks} />} />
           <Route
@@ -207,7 +207,7 @@ function App() {
           />
           <Route path="/admin/meet/m/:roomID" element={<Room />} />
           <Route path="/admin/meet/end" element={<EndMeet />} />
-        </Route>
+        </Route> */}
         <Route path="*" element={<NotFound />} />
       </Routes>
       {(!link.includes("meet") ||

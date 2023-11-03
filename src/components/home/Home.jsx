@@ -93,7 +93,6 @@ function Home({ premii }) {
           <div className="linie">
             <div className="cifra">
               <h1>
-                <span> + </span>
                 <span id="cifra_ani">
                   {" "}
                   <CountUp
@@ -104,26 +103,38 @@ function Home({ premii }) {
                   />{" "}
                 </span>
               </h1>
-              <h2>Ani de experienta</h2>
+              <h2>Membrii</h2>
             </div>
 
             <div className="cifra">
               <h1>
-                <span> + </span>
                 <span id="cifra_nat">
                   <CountUp
-                    end={6}
+                    end={3}
                     redraw={true}
                     enableScrollSpy
                     scrollSpyDelay={600}
                   />
                 </span>
               </h1>
-              <h2>Participari la nationala</h2>
+              <h2>Subechipe</h2>
+            </div>
+            <div className="cifra">
+              <h1>
+                <span id="cifra_nat">
+                  <CountUp
+                    end={3}
+                    redraw={true}
+                    enableScrollSpy
+                    scrollSpyDelay={600}
+                  />
+                </span>
+              </h1>
+              <h2>Subechipe</h2>
             </div>
           </div>
 
-          <div className="linie">
+          {/* <div className="linie">
             <div className="cifra">
               <h1>
                 <span> + </span>
@@ -153,7 +164,7 @@ function Home({ premii }) {
               </h1>
               <h2>Alumni</h2>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       <div
@@ -193,10 +204,15 @@ function Home({ premii }) {
         <h1 ref={h1}>Despre</h1>
         <h2 data-aos="zoom-in-up">Despre</h2>
         <p data-aos="zoom-in-up">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. In earum
-          facilis, exercitationem quisquam quos asperiores nisi quia vitae
-          repellendus mollitia dolorem doloribus accusantium, odit neque, natus
-          commodi ex rerum consequatur!
+          The “FIIR_Bots” is a motivated team, which was established this year
+          due to the desire of students to be involved in practical activities,
+          research and individual study outside the hours provided in the
+          education plan. The team is composed of 14 passionate students and a
+          mentor from the Faculty of Industrial Engineering and Robotics
+          (F.I.I.R) within the National University of Science and Technology
+          POLITEHNICA Bucharest (U.N.S.T.P.B.). These enthusiastic and talented
+          young people bring with them a range of skills and experience in
+          robotics and industrial engineering.  
         </p>
         <Link to={"/despre"} className="button" data-aos="zoom-in-up">
           afla mai multe

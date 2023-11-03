@@ -48,18 +48,25 @@ function Despre() {
             ></div>
           </div>
           <p data-aos-delay="700" data-aos="fade-down">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum
-            sapiente ut quae iure assumenda, aliquid obcaecati nisi amet,
-            suscipit ullam laudantium fugiat temporibus a. Veniam officia
-            voluptates suscipit eos, minus autem dolorum quas sit a, aut
-            provident. Sint modi iusto possimus impedit accusantium
-            exercitationem voluptatum natus nisi repudiandae, ducimus, qui
-            doloribus corrupti doloremque unde vitae veritatis autem at velit!
-            Unde veniam nulla nemo saepe, provident, sequi architecto asperiores
-            eius laboriosam eos, obcaecati suscipit. Eum a quidem minus
-            accusantium voluptatibus eos architecto, cum repellat assumenda
-            soluta maiores placeat deleniti illum voluptatem tenetur eligendi
-            reprehenderit itaque laudantium aperiam alias molestias ut.
+            The “FIIR_Bots” is a motivated team, which was established this year
+            due to the desire of students to be involved in practical
+            activities, research and individual study outside the hours provided
+            in the education plan. The team is composed of 14 passionate
+            students and a mentor from the Faculty of Industrial Engineering and
+            Robotics (F.I.I.R) within the National University of Science and
+            Technology POLITEHNICA Bucharest (U.N.S.T.P.B.). These enthusiastic
+            and talented young people bring with them a range of skills and
+            experience in robotics and industrial engineering. The mentor, an
+            experienced professor and researcher in the field of industrial
+            engineering and robotics, brings a special guidance perspective
+            based on the principles of S.T.E.M. (Science, Technology,
+            Engineering and Mathematics) and ”Long Life Learning”. The mentor is
+            responsible for guiding them, giving them technical advice, and
+            making sure their project is developing in the right direction. The
+            students are from various specializations within the faculty
+            (digital production systems, robotics, applied informatics in
+            industrial engineering) and from different study years (they are
+            students from all study years).  
           </p>
         </div>
       </div>
