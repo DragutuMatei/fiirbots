@@ -24,6 +24,7 @@ function Alumni({ ani, alumni }) {
   useEffect(() => {
     AOS.init();
   }, []);
+  
   return (
     <div style={{ background: "#2f2f2f" }}>
       <LazyLoadImage

@@ -1,36 +1,11 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
+import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import AdminPages from "./components/admin/AdminPages";
-import AlumniPage from "./components/admin/components/AlumniPage";
-import AniPage from "./components/admin/components/AniPage";
-import AppsPage from "./components/admin/components/AppsPage";
-import BlogPage from "./components/admin/components/BlogPage";
-import Index from "./components/admin/components/Index";
-import PremiiPage from "./components/admin/components/PremiiPage";
-import ShopPage from "./components/admin/components/ShopPage";
-import SponsorsPage from "./components/admin/components/SponsorsPage";
 import Alumni from "./components/alumni/Alumni";
-import Apps from "./components/apps/Apps";
-import Blog from "./components/blog/Blog";
-import BlogPost from "./components/blog/BlogPost";
 import Despre from "./components/despre/Despre";
 import Home from "./components/home/Home";
 import NotFound from "./components/notfound/NotFound";
-import Cart from "./components/shop/Cart";
-import ProductPage from "./components/shop/ProductPage";
-import Shop from "./components/shop/Shop";
-import Sponsors from "./components/sponsors/Sponsors";
-import Firestore from "./components/utils/Firestore";
 import Footer from "./components/utils/Footer";
 import Navbar from "./components/utils/Navbar";
-import Users from "./components/admin/components/Users";
-import BlogPagePost from "./components/admin/components/BlogPagePost";
-import Crm from "./components/admin/components/Crm";
-import CreateRoom from "./components/admin/components/Meet/CreateRoom";
-import EndMeet from "./components/admin/components/Meet/EndMeet";
-import Room from "./components/admin/components/Meet/Room";
-import Errors from "./components/admin/components/Meet/Errors";
 
 // const firestore = new Firestore();
 
