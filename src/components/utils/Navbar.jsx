@@ -11,12 +11,12 @@ import Firestore from "./Firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
-const firestore = new Firestore();
+// const firestore = new Firestore();
 
 function Navbar() {
   const { pathname } = useLocation();
   const nav = useRef(null);
-  const [user, loading, error] = useAuthState(firestore.getuser());
+  // const [user, loading, error] = useAuthState(firestore.getuser());
 
   const size = useWindowSize();
   const nav_click = () => {
@@ -42,13 +42,13 @@ function Navbar() {
     window.scrollTo(0, 0);
   }, [pathname]);
 
-  const signInWithGoogle = async () => {
-    await firestore.signInWithGoogle();
-  };
+  // const signInWithGoogle = async () => {
+  //   await firestore.signInWithGoogle();
+  // };
 
-  const logout = async () => {
-    await firestore.logout();
-  };
+  // const logout = async () => {
+  //   await firestore.logout();
+  // };
 
   return (
     <section className="navigation">
