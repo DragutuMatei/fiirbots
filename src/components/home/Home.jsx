@@ -89,7 +89,7 @@ function Home({ premii }) {
           </svg>
         </div>
         <h3 data-aos="fade-down">
-          <b>FIIRBOTS</b> in cifre:
+          <b>FIIRBOTS</b> in numbers:
         </h3>
         <div className="tab" data-aos="fade-down">
           <div className="linie">
@@ -105,7 +105,7 @@ function Home({ premii }) {
                   />{" "}
                 </span>
               </h1>
-              <h2>Membrii</h2>
+              <h2>Members</h2>
             </div>
 
             <div className="cifra">
@@ -119,7 +119,7 @@ function Home({ premii }) {
                   />
                 </span>
               </h1>
-              <h2>Subechipe</h2>
+              <h2>Teams</h2>
             </div>
             {/* <div className="cifra">
               <h1>
@@ -203,8 +203,8 @@ function Home({ premii }) {
             ></path>
           </svg>
         </div>
-        <h1 ref={h1}>Despre</h1>
-        <h2 data-aos="zoom-in-up">Despre</h2>
+        <h1 ref={h1}>About</h1>
+        <h2 data-aos="zoom-in-up">About</h2>
         <p data-aos="zoom-in-up">
           The “FIIR_Bots” is a motivated team, which was established this year
           due to the desire of students to be involved in practical activities,
@@ -217,7 +217,7 @@ function Home({ premii }) {
           robotics and industrial engineering.
         </p>
         <Link to={"/despre"} className="button" data-aos="zoom-in-up">
-          afla mai multe
+          find more
         </Link>
       </div>
       <div className="cards">

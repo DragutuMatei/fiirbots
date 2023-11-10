@@ -13,8 +13,8 @@ function DateContact() {
       <div className="left">
         <div className="title">
           <h1 data-aos="fade-down">
-            Suntem de la{" "}
-            <span>Facultatea de Inginerie Industriala si Robotica</span>
+            We are from {" "}
+            <span>POLITEHNICA Bucuresti National University for Science and Technology</span>
           </h1>
           <div className="linie" data-aos="fade-right"></div>
         </div>
@@ -28,7 +28,10 @@ function DateContact() {
           </li>
           <li data-aos="fade-right">
             <a href="mailto:secretariat@fiir.pub.ro">secretariat@fiir.pub.ro</a>
-            <a href="mailto:decanat@fiir.pub.ro">decanat@fiir.pub.ro</a>
+          </li>
+          <li data-aos="fade-right">
+          <a href="mailto:decanat@fiir.pub.ro">decanat@fiir.pub.ro</a>
+
           </li>
         </ul>
       </div>

@@ -39,7 +39,7 @@ function Despre() {
               data-aos="fade-right"
               data-aos-delay={window.innerWidth > 700 ? 600 : 0}
             >
-              Despre FIIRBOTS
+              About FIIRBOTS
             </h1>
             <div
               data-aos="fade-right"

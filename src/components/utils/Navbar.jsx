@@ -76,7 +76,7 @@ function Navbar() {
               <Link to="/blog">Blog</Link>
             </li> */}
             <li>
-              <Link to="/despre">Despre</Link>
+              <Link to="/despre">About</Link>
             </li>
             <li>
               <Link to="/team">Team</Link>

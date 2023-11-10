@@ -65,11 +65,24 @@ function Alumni({ ani, alumni }) {
         <SwiperSlide style={{ margin: "0 15px" }}>
           <Persoana
             no={true}
+            img={require("../../img/Cazacu.jpeg")}
+            // id={p.id}
+            nume={"Cristiana Cazacu"}
+            faculta={"Team manager"}
+            text={
+              "<b>Prof.</b> at Faculty of industrial engineering and robotics"
+            }
+          />
+        </SwiperSlide>{" "}
+        <SwiperSlide style={{ margin: "0 15px" }}>
+          <Persoana
+            no={true}
             img={require("../../img/hanga.jpg")}
             // id={p.id}
             nume={"Hanga Mihail"}
-            text={"Facultatea de Inginerie Industriala si Robotica"}
-          />{" "}
+            faculta={"Team leader"}
+            text={"Faculty of industrial engineering and robotics"}
+          />
         </SwiperSlide>{" "}
         <SwiperSlide style={{ margin: "0 15px" }}>
           <Persoana
@@ -77,7 +90,7 @@ function Alumni({ ani, alumni }) {
             img={require("../../img/liviu.jpeg")}
             // id={p.id}
             nume={"Liviu Burghi"}
-            text={"Facultatea de Inginerie Mecanica si Mecatronica"}
+            text={"Faculty of Mechanical Engineering and Mechatronics"}
           />{" "}
         </SwiperSlide>{" "}
         <SwiperSlide style={{ margin: "0 15px" }}>
@@ -86,7 +99,7 @@ function Alumni({ ani, alumni }) {
             img={require("../../img/io.jpeg")}
             // id={p.id}
             nume={"Matei Dragutu"}
-            text={"Facultatea de Inginerie Industriala si Robotica"}
+            text={"Faculty of industrial engineering and robotics"}
           />{" "}
         </SwiperSlide>{" "}
         <SwiperSlide style={{ margin: "0 15px" }}>
@@ -95,7 +108,7 @@ function Alumni({ ani, alumni }) {
             img={require("../../img/teo.jpeg")}
             // id={p.id}
             nume={"Nasu Teodor Cristian"}
-            text={"Facultatea de Inginerie Industriala si Robotica"}
+            text={"Faculty of industrial engineering and robotics"}
           />{" "}
         </SwiperSlide>{" "}
         <SwiperSlide style={{ margin: "0 15px" }}>
@@ -104,7 +117,7 @@ function Alumni({ ani, alumni }) {
             img={require("../../img/carmen.jpeg")}
             // id={p.id}
             nume={"Carmen Selaru"}
-            text={"Facultatea de Inginerie Industriala si Robotica"}
+            text={"Faculty of industrial engineering and robotics"}
           />{" "}
         </SwiperSlide>{" "}
         <SwiperSlide style={{ margin: "0 15px" }}>
@@ -113,7 +126,7 @@ function Alumni({ ani, alumni }) {
             img={require("../../img/andrew.jpeg")}
             // id={p.id}
             nume={"Andrei Simion"}
-            text={"Facultatea de Inginerie Industriala si Robotica"}
+            text={"Faculty of industrial engineering and robotics"}
           />{" "}
         </SwiperSlide>
         <SwiperSlide style={{ margin: "0 15px" }}>
@@ -122,7 +135,7 @@ function Alumni({ ani, alumni }) {
             img={require("../../img/radu.jpeg")}
             // id={p.id}
             nume={"Radu Ionescu"}
-            text={"Facultatea de Inginerie Industriala si Robotica"}
+            text={"Faculty of industrial engineering and robotics"}
           />{" "}
         </SwiperSlide>
         <SwiperSlide style={{ margin: "0 15px" }}>
@@ -131,7 +144,7 @@ function Alumni({ ani, alumni }) {
             img={require("../../img/bogdan.jpeg")}
             // id={p.id}
             nume={"Costea Bogdan Ionut"}
-            text={"Facultatea de Inginerie Industriala si Robotica"}
+            text={"Faculty of industrial engineering and robotics"}
           />{" "}
         </SwiperSlide>{" "}
         <SwiperSlide style={{ margin: "0 15px" }}>
@@ -140,7 +153,7 @@ function Alumni({ ani, alumni }) {
             img={require("../../img/dinu.jpeg")}
             // id={p.id}
             nume={"Dinu Cristian"}
-            text={"Facultatea de Inginerie Industriala si Robotica"}
+            text={"Faculty of industrial engineering and robotics"}
           />{" "}
         </SwiperSlide>{" "}
         <SwiperSlide style={{ margin: "0 15px" }}>
@@ -149,7 +162,7 @@ function Alumni({ ani, alumni }) {
             img={require("../../img/stefan.jpeg")}
             // id={p.id}
             nume={"Cula Stefan"}
-            text={"Facultatea de Inginerie Industriala si Robotica"}
+            text={"Faculty of industrial engineering and robotics"}
           />{" "}
         </SwiperSlide>{" "}
         {/* {persoane &&
