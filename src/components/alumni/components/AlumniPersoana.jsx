@@ -18,12 +18,11 @@ function Persoana({ nume, faculta, text, img }) {
 
         <div className="ttext">
           <h1>{nume}</h1>
-          <h3>{faculta}</h3>
+          {/* <h3>{faculta}</h3> */}
         </div>
       </div>
       <div className="text">
         <p
-          style={{ textAlign: "left" }}
           dangerouslySetInnerHTML={{ __html: text }}
         />
       </div>

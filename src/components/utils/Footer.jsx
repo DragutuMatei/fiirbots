@@ -32,7 +32,7 @@ function Footer() {
             </li>
 
             <li>
-              <a href="#">Instagram</a>
+              <a href="https://www.instagram.com/fiirbots/" target="_blank">Instagram</a>
             </li>
 
             <li>

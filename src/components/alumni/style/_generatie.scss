@@ -1,7 +1,7 @@
 .swiper {
   width: 100vw;
   height: auto;
-  padding: 50px 0;
+  padding: 50px 0 !important;
 }
 
 .swiper-slide {
@@ -62,7 +62,7 @@
         }
         h1 {
           font-weight: 800;
-          color: $dark_green;
+          color: $kinda_blue;
           margin-bottom: 10px;
         }
         h3 {
@@ -79,6 +79,7 @@
       width: 100%;
       padding: 20px 25px;
       p {
+        text-align: center;
         font-size: 17px;
         font-weight: 400;
         color: $black2;

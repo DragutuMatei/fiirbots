@@ -58,9 +58,11 @@ function Home({ premii }) {
             team
           </h2>
         </div>
-        {/* <div className="img" data-aos="fade-left">
-          <LazyLoadImage src={main} alt="main" width="100%" height="100%" />
-        </div> */}
+        <div className="img" data-aos="fade-left">
+          <img src={require("../../img/fiirlogo.png")} alt="" />
+          <img src={require("../../img/LOGO_UPB_oficial_RO.png")} alt="" />
+          {/* <LazyLoadImage src={main} alt="main" width="100%" height="100%" /> */}
+        </div>
       </div>
       <div className="cifre">
         <div className="custom-shape-divider-bottom-1669758197">
@@ -212,7 +214,7 @@ function Home({ premii }) {
           (F.I.I.R) within the National University of Science and Technology
           POLITEHNICA Bucharest (U.N.S.T.P.B.). These enthusiastic and talented
           young people bring with them a range of skills and experience in
-          robotics and industrial engineering.  
+          robotics and industrial engineering.
         </p>
         <Link to={"/despre"} className="button" data-aos="zoom-in-up">
           afla mai multe

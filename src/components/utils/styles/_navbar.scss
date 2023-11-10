@@ -100,7 +100,7 @@ nav {
   width: 70px;
 }
 
-@media only screen and (max-width: 1270px) {
+@media only screen and (max-width: 770px) {
   .nav-mobile {
     display: block;
   }
@@ -180,7 +180,7 @@ nav {
   }
 }
 
-@media screen and (min-width: 1270px) {
+@media screen and (min-width: 770px) {
   .nav-list {
     display: block !important;
   }

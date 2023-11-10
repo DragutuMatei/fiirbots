@@ -24,7 +24,7 @@ function Alumni({ ani, alumni }) {
   useEffect(() => {
     AOS.init();
   }, []);
-  
+
   return (
     <div style={{ background: "#2f2f2f" }}>
       <LazyLoadImage
@@ -62,142 +62,116 @@ function Alumni({ ani, alumni }) {
         modules={[Pagination, Navigation]}
         className="mySwiper"
       >
-        <SwiperSlide>
+        <SwiperSlide  style={{margin:"0 15px"}}>
           <Persoana
             no={true}
-            img={
-              "https://scontent-otp1-1.xx.fbcdn.net/v/t39.30808-6/278232996_4897429856971542_1282493310818328715_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=5f2048&_nc_ohc=rBTvlty7_gwAX-56zL0&_nc_ht=scontent-otp1-1.xx&oh=00_AfBWJXqz90_TI_aVO7YVJlYy6Im2Ls39THAkcSVfRsDopQ&oe=65499380"
-            }
+            img={require("../../img/hanga.jpg")}
             // id={p.id}
             nume={"Hanga Mihail"}
-            faculta={"idk"}
-            text={"poate"}
+            text={"Facultatea de Inginerie Industriala si Robotica"}
           />{" "}
         </SwiperSlide>{" "}
-        <SwiperSlide>
+                <SwiperSlide  style={{margin:"0 15px"}}>
+
           <Persoana
             no={true}
-            img={
-              "https://scontent-otp1-1.xx.fbcdn.net/v/t39.30808-6/278232996_4897429856971542_1282493310818328715_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=5f2048&_nc_ohc=rBTvlty7_gwAX-56zL0&_nc_ht=scontent-otp1-1.xx&oh=00_AfBWJXqz90_TI_aVO7YVJlYy6Im2Ls39THAkcSVfRsDopQ&oe=65499380"
-            }
+            img={require("../../img/liviu.jpeg")}
             // id={p.id}
-            nume={"Hanga Mihail"}
-            faculta={"idk"}
-            text={"poate"}
+            nume={"Liviu Burghi"}
+            text={"Facultatea de Inginerie Mecanica si Mecatronica"}
           />{" "}
         </SwiperSlide>{" "}
-        <SwiperSlide>
+                <SwiperSlide  style={{margin:"0 15px"}}>
+
           <Persoana
             no={true}
-            img={
-              "https://scontent-otp1-1.xx.fbcdn.net/v/t39.30808-6/278232996_4897429856971542_1282493310818328715_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=5f2048&_nc_ohc=rBTvlty7_gwAX-56zL0&_nc_ht=scontent-otp1-1.xx&oh=00_AfBWJXqz90_TI_aVO7YVJlYy6Im2Ls39THAkcSVfRsDopQ&oe=65499380"
-            }
+            img={require("../../img/io.jpeg")}
             // id={p.id}
-            nume={"Hanga Mihail"}
-            faculta={"idk"}
-            text={"poate"}
+            nume={"Matei Dragutu"}
+            text={"Facultatea de Inginerie Industriala si Robotica"}
           />{" "}
         </SwiperSlide>{" "}
-        <SwiperSlide>
+                <SwiperSlide  style={{margin:"0 15px"}}>
+
           <Persoana
             no={true}
-            img={
-              "https://scontent-otp1-1.xx.fbcdn.net/v/t39.30808-6/278232996_4897429856971542_1282493310818328715_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=5f2048&_nc_ohc=rBTvlty7_gwAX-56zL0&_nc_ht=scontent-otp1-1.xx&oh=00_AfBWJXqz90_TI_aVO7YVJlYy6Im2Ls39THAkcSVfRsDopQ&oe=65499380"
-            }
+            img={require("../../img/teo.jpeg")}
             // id={p.id}
-            nume={"Hanga Mihail"}
-            faculta={"idk"}
-            text={"poate"}
+            nume={"Nasu Teodor Cristian"}
+            text={"Facultatea de Inginerie Industriala si Robotica"}
           />{" "}
         </SwiperSlide>{" "}
-        <SwiperSlide>
+                <SwiperSlide  style={{margin:"0 15px"}}>
+
           <Persoana
             no={true}
-            img={
-              "https://scontent-otp1-1.xx.fbcdn.net/v/t39.30808-6/278232996_4897429856971542_1282493310818328715_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=5f2048&_nc_ohc=rBTvlty7_gwAX-56zL0&_nc_ht=scontent-otp1-1.xx&oh=00_AfBWJXqz90_TI_aVO7YVJlYy6Im2Ls39THAkcSVfRsDopQ&oe=65499380"
-            }
+            img={require("../../img/carmen.jpeg")}
             // id={p.id}
-            nume={"Hanga Mihail"}
-            faculta={"idk"}
-            text={"poate"}
+            nume={"Carmen Selaru"}
+            text={"Facultatea de Inginerie Industriala si Robotica"}
           />{" "}
         </SwiperSlide>{" "}
-        <SwiperSlide>
+                <SwiperSlide  style={{margin:"0 15px"}}>
+
           <Persoana
             no={true}
             img={
-              "https://scontent-otp1-1.xx.fbcdn.net/v/t39.30808-6/278232996_4897429856971542_1282493310818328715_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=5f2048&_nc_ohc=rBTvlty7_gwAX-56zL0&_nc_ht=scontent-otp1-1.xx&oh=00_AfBWJXqz90_TI_aVO7YVJlYy6Im2Ls39THAkcSVfRsDopQ&oe=65499380"
+              require("../../img/andrew.jpeg")
             }
             // id={p.id}
-            nume={"Hanga Mihail"}
-            faculta={"idk"}
-            text={"poate"}
+            nume={"Andrei Simion"}
+            text={"Facultatea de Inginerie Industriala si Robotica"}
           />{" "}
         </SwiperSlide>
-        <SwiperSlide>
+                <SwiperSlide  style={{margin:"0 15px"}}>
+
           <Persoana
             no={true}
             img={
-              "https://scontent-otp1-1.xx.fbcdn.net/v/t39.30808-6/278232996_4897429856971542_1282493310818328715_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=5f2048&_nc_ohc=rBTvlty7_gwAX-56zL0&_nc_ht=scontent-otp1-1.xx&oh=00_AfBWJXqz90_TI_aVO7YVJlYy6Im2Ls39THAkcSVfRsDopQ&oe=65499380"
-            }
+            require("../../img/radu.jpeg")}
             // id={p.id}
-            nume={"Hanga Mihail"}
-            faculta={"idk"}
-            text={"poate"}
+            nume={"Radu Ionescu"}
+            text={"Facultatea de Inginerie Industriala si Robotica"}
           />{" "}
         </SwiperSlide>
-        <SwiperSlide>
+                <SwiperSlide  style={{margin:"0 15px"}}>
+
           <Persoana
             no={true}
-            img={
-              "https://scontent-otp1-1.xx.fbcdn.net/v/t39.30808-6/278232996_4897429856971542_1282493310818328715_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=5f2048&_nc_ohc=rBTvlty7_gwAX-56zL0&_nc_ht=scontent-otp1-1.xx&oh=00_AfBWJXqz90_TI_aVO7YVJlYy6Im2Ls39THAkcSVfRsDopQ&oe=65499380"
-            }
+            img={require("../../img/bogdan.jpeg")}
             // id={p.id}
-            nume={"Hanga Mihail"}
-            faculta={"idk"}
-            text={"poate"}
+            nume={"Costea Bogdan Ionut"}
+            text={"Facultatea de Inginerie Industriala si Robotica"}
           />{" "}
         </SwiperSlide>{" "}
-        <SwiperSlide>
+                <SwiperSlide  style={{margin:"0 15px"}}>
+
           <Persoana
             no={true}
             img={
-              "https://scontent-otp1-1.xx.fbcdn.net/v/t39.30808-6/278232996_4897429856971542_1282493310818328715_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=5f2048&_nc_ohc=rBTvlty7_gwAX-56zL0&_nc_ht=scontent-otp1-1.xx&oh=00_AfBWJXqz90_TI_aVO7YVJlYy6Im2Ls39THAkcSVfRsDopQ&oe=65499380"
-            }
+           require("../../img/dinu.jpeg") }
             // id={p.id}
-            nume={"Hanga Mihail"}
-            faculta={"idk"}
-            text={"poate"}
+            nume={"Dinu Cristian"}
+            text={"Facultatea de Inginerie Industriala si Robotica"}
           />{" "}
         </SwiperSlide>{" "}
-        <SwiperSlide>
+                <SwiperSlide  style={{margin:"0 15px"}}>
+
           <Persoana
             no={true}
             img={
-              "https://scontent-otp1-1.xx.fbcdn.net/v/t39.30808-6/278232996_4897429856971542_1282493310818328715_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=5f2048&_nc_ohc=rBTvlty7_gwAX-56zL0&_nc_ht=scontent-otp1-1.xx&oh=00_AfBWJXqz90_TI_aVO7YVJlYy6Im2Ls39THAkcSVfRsDopQ&oe=65499380"
-            }
+           require("../../img/stefan.jpeg") }
             // id={p.id}
-            nume={"Hanga Mihail"}
-            faculta={"idk"}
-            text={"poate"}
+            nume={"Cula Stefan"}
+            text={"Facultatea de Inginerie Industriala si Robotica"}
           />{" "}
         </SwiperSlide>{" "}
-        <SwiperSlide>
-          <Persoana
-            no={true}
-            img={
-              "https://scontent-otp1-1.xx.fbcdn.net/v/t39.30808-6/278232996_4897429856971542_1282493310818328715_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=5f2048&_nc_ohc=rBTvlty7_gwAX-56zL0&_nc_ht=scontent-otp1-1.xx&oh=00_AfBWJXqz90_TI_aVO7YVJlYy6Im2Ls39THAkcSVfRsDopQ&oe=65499380"
-            }
-            // id={p.id}
-            nume={"Hanga Mihail"}
-            faculta={"idk"}
-            text={"poate"}
-          />{" "}
-        </SwiperSlide>
+        
         {/* {persoane &&
           persoane.map((p) => {
             return (
-              <SwiperSlide>
+                      <SwiperSlide  style={{margin:"0 15px"}}>
+
                 {p && (
                   <Persoana
                     no={true}
