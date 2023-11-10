@@ -14,7 +14,7 @@ function DateContact() {
         <div className="title">
           <h1 data-aos="fade-down">
             We are from {" "}
-            <span>POLITEHNICA Bucuresti National University for Science and Technology</span>
+            <span>National University of Science and Technology Politehnica Bucharest</span>
           </h1>
           <div className="linie" data-aos="fade-right"></div>
         </div>
