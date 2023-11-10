@@ -98,7 +98,7 @@ function Home({ premii }) {
                 <span id="cifra_ani">
                   {" "}
                   <CountUp
-                    end={10}
+                    end={15}
                     enableScrollSpy
                     redraw={true}
                     scrollSpyDelay={600}
@@ -119,7 +119,7 @@ function Home({ premii }) {
                   />
                 </span>
               </h1>
-              <h2>Teams</h2>
+              <h2>Robots</h2>
             </div>
             {/* <div className="cifra">
               <h1>
@@ -209,7 +209,7 @@ function Home({ premii }) {
           The “FIIR_Bots” is a motivated team, which was established this year
           due to the desire of students to be involved in practical activities,
           research and individual study outside the hours provided in the
-          education plan. The team is composed of 14 passionate students and a
+          education plan. The team is composed of 15 passionate students and a
           mentor from the Faculty of Industrial Engineering and Robotics
           (F.I.I.R) within the National University of Science and Technology
           POLITEHNICA Bucharest (U.N.S.T.P.B.). These enthusiastic and talented
