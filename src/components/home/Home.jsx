@@ -98,7 +98,7 @@ function Home({ premii }) {
                 <span id="cifra_ani">
                   {" "}
                   <CountUp
-                    end={6}
+                    end={10}
                     enableScrollSpy
                     redraw={true}
                     scrollSpyDelay={600}
@@ -121,7 +121,7 @@ function Home({ premii }) {
               </h1>
               <h2>Subechipe</h2>
             </div>
-            <div className="cifra">
+            {/* <div className="cifra">
               <h1>
                 <span id="cifra_nat">
                   <CountUp
@@ -133,7 +133,7 @@ function Home({ premii }) {
                 </span>
               </h1>
               <h2>Subechipe</h2>
-            </div>
+            </div> */}
           </div>
 
           {/* <div className="linie">

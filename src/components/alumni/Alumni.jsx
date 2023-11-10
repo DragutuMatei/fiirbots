@@ -62,7 +62,7 @@ function Alumni({ ani, alumni }) {
         modules={[Pagination, Navigation]}
         className="mySwiper"
       >
-        <SwiperSlide  style={{margin:"0 15px"}}>
+        <SwiperSlide style={{ margin: "0 15px" }}>
           <Persoana
             no={true}
             img={require("../../img/hanga.jpg")}
@@ -71,8 +71,7 @@ function Alumni({ ani, alumni }) {
             text={"Facultatea de Inginerie Industriala si Robotica"}
           />{" "}
         </SwiperSlide>{" "}
-                <SwiperSlide  style={{margin:"0 15px"}}>
-
+        <SwiperSlide style={{ margin: "0 15px" }}>
           <Persoana
             no={true}
             img={require("../../img/liviu.jpeg")}
@@ -81,8 +80,7 @@ function Alumni({ ani, alumni }) {
             text={"Facultatea de Inginerie Mecanica si Mecatronica"}
           />{" "}
         </SwiperSlide>{" "}
-                <SwiperSlide  style={{margin:"0 15px"}}>
-
+        <SwiperSlide style={{ margin: "0 15px" }}>
           <Persoana
             no={true}
             img={require("../../img/io.jpeg")}
@@ -91,8 +89,7 @@ function Alumni({ ani, alumni }) {
             text={"Facultatea de Inginerie Industriala si Robotica"}
           />{" "}
         </SwiperSlide>{" "}
-                <SwiperSlide  style={{margin:"0 15px"}}>
-
+        <SwiperSlide style={{ margin: "0 15px" }}>
           <Persoana
             no={true}
             img={require("../../img/teo.jpeg")}
@@ -101,8 +98,7 @@ function Alumni({ ani, alumni }) {
             text={"Facultatea de Inginerie Industriala si Robotica"}
           />{" "}
         </SwiperSlide>{" "}
-                <SwiperSlide  style={{margin:"0 15px"}}>
-
+        <SwiperSlide style={{ margin: "0 15px" }}>
           <Persoana
             no={true}
             img={require("../../img/carmen.jpeg")}
@@ -111,31 +107,25 @@ function Alumni({ ani, alumni }) {
             text={"Facultatea de Inginerie Industriala si Robotica"}
           />{" "}
         </SwiperSlide>{" "}
-                <SwiperSlide  style={{margin:"0 15px"}}>
-
+        <SwiperSlide style={{ margin: "0 15px" }}>
           <Persoana
             no={true}
-            img={
-              require("../../img/andrew.jpeg")
-            }
+            img={require("../../img/andrew.jpeg")}
             // id={p.id}
             nume={"Andrei Simion"}
             text={"Facultatea de Inginerie Industriala si Robotica"}
           />{" "}
         </SwiperSlide>
-                <SwiperSlide  style={{margin:"0 15px"}}>
-
+        <SwiperSlide style={{ margin: "0 15px" }}>
           <Persoana
             no={true}
-            img={
-            require("../../img/radu.jpeg")}
+            img={require("../../img/radu.jpeg")}
             // id={p.id}
             nume={"Radu Ionescu"}
             text={"Facultatea de Inginerie Industriala si Robotica"}
           />{" "}
         </SwiperSlide>
-                <SwiperSlide  style={{margin:"0 15px"}}>
-
+        <SwiperSlide style={{ margin: "0 15px" }}>
           <Persoana
             no={true}
             img={require("../../img/bogdan.jpeg")}
@@ -144,29 +134,24 @@ function Alumni({ ani, alumni }) {
             text={"Facultatea de Inginerie Industriala si Robotica"}
           />{" "}
         </SwiperSlide>{" "}
-                <SwiperSlide  style={{margin:"0 15px"}}>
-
+        <SwiperSlide style={{ margin: "0 15px" }}>
           <Persoana
             no={true}
-            img={
-           require("../../img/dinu.jpeg") }
+            img={require("../../img/dinu.jpeg")}
             // id={p.id}
             nume={"Dinu Cristian"}
             text={"Facultatea de Inginerie Industriala si Robotica"}
           />{" "}
         </SwiperSlide>{" "}
-                <SwiperSlide  style={{margin:"0 15px"}}>
-
+        <SwiperSlide style={{ margin: "0 15px" }}>
           <Persoana
             no={true}
-            img={
-           require("../../img/stefan.jpeg") }
+            img={require("../../img/stefan.jpeg")}
             // id={p.id}
             nume={"Cula Stefan"}
             text={"Facultatea de Inginerie Industriala si Robotica"}
           />{" "}
         </SwiperSlide>{" "}
-        
         {/* {persoane &&
           persoane.map((p) => {
             return (
