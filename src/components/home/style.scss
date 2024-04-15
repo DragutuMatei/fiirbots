@@ -530,8 +530,28 @@
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
+  
   img {
     width: 100vw;
+  }
+  .apl{
+    width: 100lvw;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    
+    .patrat{
+      padding: 30px;
+      border-radius: 10px;
+      cursor: pointer;
+      &:hover{
+        background: red;
+      }
+      img{
+        width: 100px;
+      }
+    }
   }
 }
 

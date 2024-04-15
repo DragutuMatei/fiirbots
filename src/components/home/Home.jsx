@@ -19,10 +19,15 @@ import programming from "../../img/programming.svg";
 import marketing from "../../img/marketing.svg";
 import control from "../../img/control.svg";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import axios from "axios";
 
 function Home({ premii }) {
   const h1 = useRef(null);
-
+  const send = async (sigla) => {
+    await axios.post("http://127.0.0.1:5000/test", { sigla }).then((res) => {
+      console.log(res);
+    });
+  };
   useEffect(() => {
     AOS.init();
   }, []);
@@ -262,6 +267,20 @@ function Home({ premii }) {
       </div> */}
 
       <div className="al">
+        <div className="apl">
+          <div className="patrat" onClick={() => send("fiir")}>
+            <img src={require("../../img/logo_fiir.jpg")} alt="" />
+          </div>{" "}
+          <div className="patrat" onClick={() => send("rsp")}>
+            <img src={require("../../img/logo_rsp.jpg")} alt="" />
+          </div>{" "}
+          <div className="patrat" onClick={() => send("fiirbots")}>
+            <img src={require("../../img/logo_fiirbots.jpg")} alt="" />
+          </div>{" "}
+          <div className="patrat" onClick={() => send("spd")}>
+            <img src={require("../../img/logo_spd.jpg")} alt="" />
+          </div>
+        </div>
         <Svg />
         <Contact />
       </div>
