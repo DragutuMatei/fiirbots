@@ -269,16 +269,16 @@ function Home({ premii }) {
       <div className="al">
         <div className="apl">
           <div className="patrat" onClick={() => send("fiir")}>
-            <img src={require("../../img/logo_fiir.jpg")} alt="" />
+            <img src={require("../../img/logo_fiir.png")} alt="" />
           </div>{" "}
           <div className="patrat" onClick={() => send("rsp")}>
-            <img src={require("../../img/logo_rsp.jpg")} alt="" />
+            <img src={require("../../img/logo_rsp.png")} alt="" />
           </div>{" "}
           <div className="patrat" onClick={() => send("fiirbots")}>
-            <img src={require("../../img/logo_fiirbots.jpg")} alt="" />
+            <img src={require("../../img/logo_fiirbots.png")} alt="" />
           </div>{" "}
           <div className="patrat" onClick={() => send("spd")}>
-            <img src={require("../../img/logo_spd.jpg")} alt="" />
+            <img src={require("../../img/logo_spd.png")} alt="" />
           </div>
         </div>
         <Svg />
