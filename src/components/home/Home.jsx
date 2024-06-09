@@ -23,11 +23,11 @@ import axios from "axios";
 
 function Home({ premii }) {
   const h1 = useRef(null);
-  const send = async (sigla) => {
-    await axios.post("http://127.0.0.1:5000/test", { sigla }).then((res) => {
-      console.log(res);
-    });
-  };
+  // const send = async (sigla) => {
+  //   await axios.post("http://127.0.0.1:5000/test", { sigla }).then((res) => {
+  //     console.log(res);
+  //   });
+  // };
   useEffect(() => {
     AOS.init();
   }, []);
@@ -267,7 +267,7 @@ function Home({ premii }) {
       </div> */}
 
       <div className="al">
-        <div className="apl">
+        {/* <div className="apl">
           <div className="patrat" onClick={() => send("fiir")}>
             <img src={require("../../img/logo_fiir.png")} alt="" />
           </div>{" "}
@@ -280,7 +280,7 @@ function Home({ premii }) {
           <div className="patrat" onClick={() => send("spd")}>
             <img src={require("../../img/logo_spd.png")} alt="" />
           </div>
-        </div>
+        </div> */}
         <Svg />
         <Contact />
       </div>
