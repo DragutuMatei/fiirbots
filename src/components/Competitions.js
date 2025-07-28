@@ -89,7 +89,7 @@ function Competitions() {
         )}
         {(showAll || competitions.length > 4) && (
           <div className="mt-16">
-            <h3 className="text-2xl font-bold text-navy mb-8 text-center">Calendar Competițional 2024</h3>
+            <h3 className="text-2xl font-bold text-navy mb-8 text-center">Calendar Competițional 2024 - 2025</h3>
             <div className="overflow-x-auto">
               <table className="w-full bg-white rounded-xl shadow-lg">
                 <thead>
