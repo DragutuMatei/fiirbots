@@ -45,9 +45,9 @@ function Projects() {
                     <span key={tag} className="bg-lavender text-navy text-xs px-3 py-1 rounded-full">{tag}</span>
                   ))}
                 </div>
-                <a href={project.detailsUrl || '#'} className="bg-navy text-cream px-4 py-2 rounded-lg hover:bg-opacity-90 transition w-full block text-center">
+                {/* <a href={project.detailsUrl || '#'} className="bg-navy text-cream px-4 py-2 rounded-lg hover:bg-opacity-90 transition w-full block text-center">
                   Vezi Detalii
-                </a>
+                </a> */}
               </div>
             </div>
           ))}
