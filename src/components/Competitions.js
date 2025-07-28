@@ -80,7 +80,7 @@ function Competitions() {
             ))}
           </div>
         </div>
-        {!showAll && (nationalComps.length > 2 || internationalComps.length > 2) && (
+        {!showAll && (
           <div className="mt-16 text-center">
             <button onClick={() => setShowAll(true)} className="bg-skyblue text-navy px-8 py-3 rounded-lg font-medium hover:bg-opacity-90 transition shadow-lg">
               Vezi Toate Competițiile
