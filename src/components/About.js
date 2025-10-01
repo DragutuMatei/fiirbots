@@ -65,7 +65,7 @@ function About() {
           <h3 className="text-2xl font-bold text-navy mb-6 text-center">Statistici FIIRBots</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             <div className="bg-white p-6 rounded-xl shadow-md">
-              <span className="text-purple text-4xl font-bold block">25+</span>
+              <span className="text-purple text-4xl font-bold block">40+</span>
               <span className="text-navy font-medium">Membri Activi</span>
             </div>
             <div className="bg-white p-6 rounded-xl shadow-md">
@@ -73,11 +73,11 @@ function About() {
               <span className="text-navy font-medium">Proiecte Finalizate</span>
             </div>
             <div className="bg-white p-6 rounded-xl shadow-md">
-              <span className="text-purple text-4xl font-bold block">10+</span>
+              <span className="text-purple text-4xl font-bold block">17+</span>
               <span className="text-navy font-medium">Competiții</span>
             </div>
             <div className="bg-white p-6 rounded-xl shadow-md">
-              <span className="text-purple text-4xl font-bold block">8</span>
+              <span className="text-purple text-4xl font-bold block">14+</span>
               <span className="text-navy font-medium">Premii Câștigate</span>
             </div>
           </div>
