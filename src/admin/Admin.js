@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { db, auth } from '../firebase';
-import { collection, addDoc, getDocs, deleteDoc, doc } from 'firebase/firestore';
+import { collection, addDoc, getDocs, deleteDoc, doc, getDoc, setDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 
 function Admin() {
@@ -90,6 +90,45 @@ function Admin() {
     }
   };
 
+  const [redirectLink, setredirectLink] = useState('');
+
+  const fetchredirectLink = async () => {
+    try {
+      const linkDoc = await getDoc(doc(db, 'redirect', 'activeLink'));
+      if (linkDoc.exists()) {
+        setredirectLink(linkDoc.data().link);
+      }
+    } catch (error) {
+      console.error('Eroare la preluarea link-ului de redirectionat:', error);
+    }
+  };
+
+  const handleAddRedirect = async (e) => {
+    e.preventDefault();
+    try {
+      await setDoc(doc(db, 'redirect', 'activeLink'), { link: redirectLink });
+      alert('Link de redirectionat salvat cu succes!');
+      fetchredirectLink();
+    } catch (error) {
+      console.error('Eroare la salvarea link-ului de redirectionat:', error);
+      alert('Eroare la salvarea link-ului de redirectionat.');
+    }
+  };
+
+  const handleDeleteRedirect = async () => {
+    if (window.confirm('Sigur vrei să ștergi link-ul de redirectionat?')) {
+      try {
+        await deleteDoc(doc(db, 'redirect', 'activeLink'));
+        setredirectLink('');
+        alert('Link de redirectionat șters cu succes!');
+      } catch (error) {
+        console.error('Eroare la ștergerea link-ului de redirectionat:', error);
+        alert('Eroare la ștergerea link-ului de redirectionat.');
+      }
+    }
+  };
+
+
   const handleSignOut = async () => {
     await auth.signOut();
     navigate('/login');
@@ -102,6 +141,33 @@ function Admin() {
         <button onClick={handleSignOut} className="bg-red-500 text-white px-6 py-3 rounded-lg mb-8 hover:bg-red-600 transition">
           Deconectează-te
         </button>
+
+        {/* Add Recruitment Link Form */}
+        <div className="bg-white p-8 rounded-xl shadow-lg mb-12">
+          <h3 className="text-2xl font-bold text-navy mb-6">Adaugă/Editare Link de redirect pentru fiirbots.ro/redirect dar si pentru butonul din fiirbots.ro/recrutari</h3>
+          <form onSubmit={handleAddRedirect} className="space-y-4">
+            <input
+              type="url"
+              placeholder="Link Redirect (ex. https://example.com)"
+              value={redirectLink}
+              onChange={e => setredirectLink(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-lg"
+              required
+            />
+            <div className="flex space-x-4">
+              <button type="submit" className="bg-skyblue text-navy px-6 py-3 rounded-lg hover:bg-opacity-90 transition">
+                Salvează Link Redirectionat
+              </button>
+              <button
+                type="button"
+                onClick={handleDeleteRedirect}
+                className="bg-red-500 text-white px-6 py-3 rounded-lg hover:bg-red-600 transition"
+              >
+                Șterge Link Redirect
+              </button>
+            </div>
+          </form>
+        </div>
 
         {/* Add Project Form */}
         <div className="bg-white p-8 rounded-xl shadow-lg mb-12">

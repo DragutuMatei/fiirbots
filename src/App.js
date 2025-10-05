@@ -14,6 +14,8 @@ import AdminDashboard from './admin/Admin';
 import AddProject from './admin/AddProject';
 import AddTeamMember from './admin/AddTeamMember';
 import AddCompetition from './admin/AddCompetition';
+import Recrutari from './components/Recrutari';
+import RedirectPage from './components/Redirect';
 
 function Home() {
   return (
@@ -54,6 +56,8 @@ function App() {
         <Route path="/echipa" element={<Team />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/recrutari" element={<Recrutari />} />
+        <Route path="/redirect" element={<RedirectPage/>} />
         <Route
           path="/admin"
           element={
