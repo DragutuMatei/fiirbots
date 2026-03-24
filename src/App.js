@@ -84,7 +84,7 @@ function App() {
           }
         />
         <Route
-          path="/admin/edit-competition/:id"
+          path="/admin/edit/:id"
           element={
             <ProtectedRoute>
               <EditProject />

@@ -224,17 +224,17 @@ function Admin() {
               <li key={p.id} className="flex justify-between items-center">
                 <span>{p.title}</span>
                 <Link
-                  to={`/admin/edit/${project.id}`}
+                  to={`/admin/edit/${p.id}`}
                   className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 mr-2"
                 >
-                  Editează
+                  Editează proiectul
                 </Link>
-                <button
-                  onClick={() => handleDelete('projects', p.id)}
-                  className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
-                >
-                  Șterge
-                </button>
+                  <button
+                    onClick={() => handleDelete('projects', p.id)}
+                    className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
+                  >
+                    Șterge
+                  </button>
               </li>
             ))}
           </ul>
