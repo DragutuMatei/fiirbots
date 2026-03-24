@@ -17,6 +17,8 @@ import AddCompetition from './admin/AddCompetition';
 import Recrutari from './components/Recrutari';
 import EditProject from './admin/EditProject';
 import RedirectPage from './components/Redirect';
+import EditCompetition from './admin/EditCompetition';
+import EditTeamMember from './admin/EditTeamMember';
 
 function Home() {
   return (
@@ -99,6 +101,8 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="/admin/edit-competition/:id" element={<ProtectedRoute><EditCompetition /></ProtectedRoute>} />
+        <Route path="/admin/edit-member/:id" element={<ProtectedRoute><EditTeamMember /></ProtectedRoute>} />
       </Routes>
     </Router>
   );

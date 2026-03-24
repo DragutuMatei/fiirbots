@@ -12,7 +12,18 @@ function Team() {
         const membersCollection = collection(db, 'teamMembers');
         const querySnapshot = await getDocs(membersCollection);
         const membersData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        setTeamMembers(membersData.sort((a, b) => b.id.localeCompare(a.id)));
+        
+        // SORTARE INTELIGENTĂ
+        const sortedMembers = membersData.sort((a, b) => {
+          const orderA = a.order !== undefined ? a.order : 999;
+          const orderB = b.order !== undefined ? b.order : 999;
+          if (orderA !== orderB) return orderA - orderB;
+          const timeA = a.createdAt?.seconds || 0;
+          const timeB = b.createdAt?.seconds || 0;
+          return timeB - timeA;
+        });
+
+        setTeamMembers(sortedMembers);
       } catch (error) {
         console.error('Eroare la preluarea membrilor:', error);
       }

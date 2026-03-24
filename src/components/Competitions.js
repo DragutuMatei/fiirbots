@@ -12,7 +12,18 @@ function Competitions() {
         const competitionsCollection = collection(db, 'competitions');
         const querySnapshot = await getDocs(competitionsCollection);
         const competitionsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        setCompetitions(competitionsData.sort((a, b) => b.id.localeCompare(a.id)));
+        
+        // SORTARE INTELIGENTĂ
+        const sortedComps = competitionsData.sort((a, b) => {
+          const orderA = a.order !== undefined ? a.order : 999;
+          const orderB = b.order !== undefined ? b.order : 999;
+          if (orderA !== orderB) return orderA - orderB;
+          const timeA = a.createdAt?.seconds || 0;
+          const timeB = b.createdAt?.seconds || 0;
+          return timeB - timeA;
+        });
+
+        setCompetitions(sortedComps);
       } catch (error) {
         console.error('Eroare la preluarea competițiilor:', error);
       }

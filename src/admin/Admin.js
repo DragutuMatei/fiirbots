@@ -229,12 +229,12 @@ function Admin() {
                 >
                   Editează proiectul
                 </Link>
-                  <button
-                    onClick={() => handleDelete('projects', p.id)}
-                    className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
-                  >
-                    Șterge
-                  </button>
+                <button
+                  onClick={() => handleDelete('projects', p.id)}
+                  className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
+                >
+                  Șterge
+                </button>
               </li>
             ))}
           </ul>
@@ -299,15 +299,16 @@ function Admin() {
           <h3 className="text-2xl font-bold text-navy mb-6">Membri Existenți</h3>
           <ul className="space-y-4">
             {members.map(m => (
+
               <li key={m.id} className="flex justify-between items-center">
                 <span>{m.name}</span>
-                <button
-                  onClick={() => handleDelete('teamMembers', m.id)}
-                  className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
-                >
-                  Șterge
-                </button>
+                <div>
+                  <Link to={`/admin/edit-member/${m.id}`} className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 mr-2">Editează</Link>
+                  <button onClick={() => handleDelete('teamMembers', m.id)} className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">Șterge</button>
+                </div>
               </li>
+
+
             ))}
           </ul>
         </div>
@@ -390,12 +391,10 @@ function Admin() {
             {competitions.map(c => (
               <li key={c.id} className="flex justify-between items-center">
                 <span>{c.name}</span>
-                <button
-                  onClick={() => handleDelete('competitions', c.id)}
-                  className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
-                >
-                  Șterge
-                </button>
+                <div>
+                  <Link to={`/admin/edit-competition/${c.id}`} className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 mr-2">Editează</Link>
+                  <button onClick={() => handleDelete('competitions', c.id)} className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">Șterge</button>
+                </div>
               </li>
             ))}
           </ul>
