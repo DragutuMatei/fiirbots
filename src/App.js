@@ -15,6 +15,7 @@ import AddProject from './admin/AddProject';
 import AddTeamMember from './admin/AddTeamMember';
 import AddCompetition from './admin/AddCompetition';
 import Recrutari from './components/Recrutari';
+import EditProject from './admin/EditProject';
 import RedirectPage from './components/Redirect';
 
 function Home() {
@@ -57,7 +58,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/recrutari" element={<Recrutari />} />
-        <Route path="/redirect" element={<RedirectPage/>} />
+        <Route path="/redirect" element={<RedirectPage />} />
         <Route
           path="/admin"
           element={
@@ -79,6 +80,14 @@ function App() {
           element={
             <ProtectedRoute>
               <AddTeamMember />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/edit-competition/:id"
+          element={
+            <ProtectedRoute>
+              <EditProject />
             </ProtectedRoute>
           }
         />

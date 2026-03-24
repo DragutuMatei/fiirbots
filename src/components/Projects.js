@@ -12,8 +12,26 @@ function Projects() {
         const projectsCollection = collection(db, 'projects');
         const querySnapshot = await getDocs(projectsCollection);
         const projectsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        // Sortăm după dată sau ID pentru a obține ultimele
-        setProjects(projectsData.sort((a, b) => b.id.localeCompare(a.id)));
+        
+        // Logica de sortare inteligentă
+        const sortedProjects = projectsData.sort((a, b) => {
+          const orderA = a.order !== undefined ? a.order : 999;
+          const orderB = b.order !== undefined ? b.order : 999;
+
+          // 1. Sortăm după câmpul 'order' (crescător: 1, 2, 3...)
+          if (orderA !== orderB) {
+            return orderA - orderB;
+          }
+
+          // 2. Dacă ordinea e la fel, sortăm cronologic (descrescător: cele mai noi primele)
+          // Verificăm dacă există createdAt pentru compatibilitate cu datele vechi
+          const timeA = a.createdAt?.seconds || 0;
+          const timeB = b.createdAt?.seconds || 0;
+          
+          return timeB - timeA;
+        });
+
+        setProjects(sortedProjects);
       } catch (error) {
         console.error('Eroare la preluarea proiectelor:', error);
       }
@@ -45,9 +63,6 @@ function Projects() {
                     <span key={tag} className="bg-lavender text-navy text-xs px-3 py-1 rounded-full">{tag}</span>
                   ))}
                 </div>
-                {/* <a href={project.detailsUrl || '#'} className="bg-navy text-cream px-4 py-2 rounded-lg hover:bg-opacity-90 transition w-full block text-center">
-                  Vezi Detalii
-                </a> */}
               </div>
             </div>
           ))}

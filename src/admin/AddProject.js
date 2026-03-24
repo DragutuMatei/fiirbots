@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { db } from '../firebase';
-import { collection, addDoc } from 'firebase/firestore';
+// Am adăugat serverTimestamp
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore'; 
 import { useNavigate } from 'react-router-dom';
 
 function AddProject() {
@@ -9,6 +10,8 @@ function AddProject() {
   const [tags, setTags] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [detailsUrl, setDetailsUrl] = useState('');
+  // State nou pentru ordine
+  const [order, setOrder] = useState(''); 
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -19,7 +22,10 @@ function AddProject() {
         description,
         tags: tags.split(',').map(tag => tag.trim()),
         imageUrl,
-        detailsUrl
+        detailsUrl,
+        // Salvăm timpul exact și ordinea (dacă e goală, punem 999 ca să apară la final)
+        createdAt: serverTimestamp(),
+        order: order ? Number(order) : 999 
       });
       alert('Proiect adăugat cu succes!');
       navigate('/admin');
@@ -82,6 +88,18 @@ function AddProject() {
                     className="form-control"
                     value={detailsUrl}
                     onChange={(e) => setDetailsUrl(e.target.value)}
+                  />
+                </div>
+                {/* Input nou pentru Ordine */}
+                <div className="mb-3">
+                  <label className="form-label">Ordine afișare (1 apare primul, opțional)</label>
+                  <input
+                    type="number"
+                    className="form-control"
+                    value={order}
+                    onChange={(e) => setOrder(e.target.value)}
+                    placeholder="Ex: 1, 2, 3..."
+                    min="1"
                   />
                 </div>
                 <button type="submit" className="btn btn-primary">Adaugă Proiect</button>

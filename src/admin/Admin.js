@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { db, auth } from '../firebase';
 import { collection, addDoc, getDocs, deleteDoc, doc, getDoc, setDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Admin() {
   const navigate = useNavigate();
@@ -222,6 +223,12 @@ function Admin() {
             {projects.map(p => (
               <li key={p.id} className="flex justify-between items-center">
                 <span>{p.title}</span>
+                <Link
+                  to={`/admin/edit/${project.id}`}
+                  className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 mr-2"
+                >
+                  Editează
+                </Link>
                 <button
                   onClick={() => handleDelete('projects', p.id)}
                   className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
