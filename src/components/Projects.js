@@ -18,13 +18,10 @@ function Projects() {
           const orderA = a.order !== undefined ? a.order : 999;
           const orderB = b.order !== undefined ? b.order : 999;
 
-          // 1. Sortăm după câmpul 'order' (crescător: 1, 2, 3...)
           if (orderA !== orderB) {
             return orderA - orderB;
           }
 
-          // 2. Dacă ordinea e la fel, sortăm cronologic (descrescător: cele mai noi primele)
-          // Verificăm dacă există createdAt pentru compatibilitate cu datele vechi
           const timeA = a.createdAt?.seconds || 0;
           const timeB = b.createdAt?.seconds || 0;
           
@@ -45,8 +42,8 @@ function Projects() {
         <h2 className="text-3xl md:text-4xl font-bold text-center text-cream mb-16 section-title">Proiectele Noastre</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.slice(0, showAll ? projects.length : 3).map((project, index) => (
-            <div key={project.id} className="project-card bg-cream rounded-xl overflow-hidden shadow-lg">
-              <div className="h-48 flex items-center justify-center bg-skyblue">
+            <div key={project.id} className="project-card bg-cream rounded-xl overflow-hidden shadow-lg flex flex-col">
+              <div className="h-48 flex items-center justify-center bg-skyblue shrink-0">
                 {project.imageUrl ? (
                   <img src={project.imageUrl} alt={project.title} className="w-full h-full object-cover" />
                 ) : (
@@ -55,18 +52,35 @@ function Projects() {
                   </svg>
                 )}
               </div>
-              <div className="p-6">
+              {/* Am adăugat flex-grow pentru a împinge butonul în jos */}
+              <div className="p-6 flex flex-col flex-grow">
                 <h3 className="text-xl font-bold text-navy mb-2">{project.title}</h3>
-                <p className="text-gray-700 mb-4">{project.description}</p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tags.map(tag => (
-                    <span key={tag} className="bg-lavender text-navy text-xs px-3 py-1 rounded-full">{tag}</span>
+                <p className="text-gray-700 mb-4 flex-grow">{project.description}</p>
+                
+                {/* Zona de tag-uri */}
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {project.tags.map((tag, i) => (
+                    // Am pus index 'i' în caz că ai tag-uri identice
+                    <span key={i} className="bg-lavender text-navy text-xs px-3 py-1 rounded-full">{tag}</span>
                   ))}
                 </div>
+
+                {/* NOU: Afișăm butonul doar dacă există detailsUrl */}
+                {project.detailsUrl && (
+                  <a 
+                    href={project.detailsUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="bg-navy text-cream px-4 py-2 rounded-lg hover:bg-opacity-90 transition block text-center mt-auto"
+                  >
+                    Vezi Detalii
+                  </a>
+                )}
               </div>
             </div>
           ))}
         </div>
+        
         {!showAll && projects.length > 3 && (
           <div className="mt-16 text-center">
             <button onClick={() => setShowAll(true)} className="bg-skyblue text-navy px-8 py-3 rounded-lg font-medium hover:bg-opacity-90 transition shadow-lg">

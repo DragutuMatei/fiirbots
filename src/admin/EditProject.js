@@ -109,6 +109,19 @@ function EditProject() {
                   onChange={(e) => setImageUrl(e.target.value)}
                 />
               </div>
+              
+              {/* LIPSESEA ASTA: Inputul pentru URL Detalii */}
+              <div className="mb-4">
+                <label className="block text-gray-700 font-bold mb-2">URL Detalii (opțional)</label>
+                <input
+                  type="text"
+                  className="w-full px-3 py-2 border rounded-lg"
+                  value={detailsUrl}
+                  onChange={(e) => setDetailsUrl(e.target.value)}
+                  placeholder="ex. https://link-catre-proiect.com"
+                />
+              </div>
+
               <div className="mb-4">
                 <label className="block text-gray-700 font-bold mb-2">Ordine afișare (1 apare primul)</label>
                 <input
