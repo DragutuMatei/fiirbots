@@ -37,68 +37,62 @@ function Admin() {
     }
   };
 
-  const handleSyncFromSheet = async () => {
-    const rawSheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTc_tyBKVZwtJPpXWaBHxJaAi36SFZawd3FyxNT4KBM3X3ugzynRZGUgtlL9NX69Q2DwZkYIxU-k4-b/pub?gid=2071819533&single=true&output=csv";
+  const handleFileUpload = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
 
-    // Am schimbat proxy-ul cu corsproxy.io, care este mult mai stabil
-    const proxiedUrl = `https://corsproxy.io/?${encodeURIComponent(rawSheetUrl)}`;
-
-    if (!window.confirm('ATENȚIE: Această acțiune va ȘTERGE TOȚI membrii existenți din baza de date și îi va înlocui cu cei din Google Sheets. Ești sigur?')) {
+    if (!window.confirm('ATENȚIE: Această acțiune va ȘTERGE TOȚI membrii existenți din baza de date și îi va înlocui cu cei din fișierul tău CSV. Ești sigur?')) {
+      e.target.value = null; // Resetăm input-ul dacă te răzgândești
       return;
     }
 
-    try {
-      const response = await fetch(proxiedUrl);
-      if (!response.ok) {
-        throw new Error(`Eroare de la server. Status: ${response.status}`);
-      }
+    // PapaParse știe să citească direct obiectul de tip "File"
+    Papa.parse(file, {
+      header: true,
+      skipEmptyLines: true,
+      complete: async (results) => {
+        try {
+          const sheetMembers = results.data;
 
-      const csvText = await response.text();
+          const membersCollection = collection(db, 'teamMembers');
+          const snapshot = await getDocs(membersCollection);
 
-      Papa.parse(csvText, {
-        header: true,
-        skipEmptyLines: true,
-        complete: async (results) => {
-          try {
-            const sheetMembers = results.data;
-            const membersCollection = collection(db, 'teamMembers');
-            const snapshot = await getDocs(membersCollection);
-
-            console.log("Ștergem toți membrii vechi...");
-            for (const document of snapshot.docs) {
-              await deleteDoc(doc(db, 'teamMembers', document.id));
-            }
-
-            console.log("Adăugăm membrii noi...");
-            for (const sheetMember of sheetMembers) {
-              const currentName = sheetMember.name?.trim();
-
-              if (!currentName) continue;
-
-              await addDoc(collection(db, 'teamMembers'), {
-                name: currentName,
-                role: sheetMember.role?.trim() || 'FIIR',
-                imageUrl: sheetMember.imageUrl?.trim() || '',
-                socialLinks: { facebook: '', twitter: '', linkedin: '' }
-              });
-            }
-
-            fetchData();
-            alert('Baza de date a fost ștearsă complet și actualizată cu succes din Google Sheets!');
-          } catch (error) {
-            console.error('Eroare la interacțiunea cu Firebase:', error);
-            alert('Eroare la scrierea/ștergerea în Firebase. Ai oprit Adblocker-ul?');
+          // 1. Ștergem tot din Firebase
+          console.log("Ștergem toți membrii vechi...");
+          for (const document of snapshot.docs) {
+            await deleteDoc(doc(db, 'teamMembers', document.id));
           }
-        },
-        error: (error) => {
-          console.error('Eroare la formatarea CSV-ului:', error);
-          alert('A apărut o eroare la interpretarea textului CSV.');
+
+          // 2. Adăugăm membrii noi din fișier
+          console.log("Adăugăm membrii noi...");
+          for (const sheetMember of sheetMembers) {
+            const currentName = sheetMember.name?.trim();
+
+            if (!currentName) continue;
+
+            await addDoc(collection(db, 'teamMembers'), {
+              name: currentName,
+              role: sheetMember.role?.trim() || 'FIIR',
+              imageUrl: sheetMember.imageUrl?.trim() || '',
+              socialLinks: { facebook: '', twitter: '', linkedin: '' }
+            });
+          }
+
+          fetchData();
+          alert('Baza de date a fost actualizată cu succes din fișierul tău CSV!');
+        } catch (error) {
+          console.error('Eroare la interacțiunea cu Firebase:', error);
+          alert('Eroare la scrierea/ștergerea în baza de date Firebase.');
         }
-      });
-    } catch (error) {
-      console.error('Eroare de rețea:', error);
-      alert('Nu s-a putut descărca fișierul. Asigură-te că ai oprit Adblocker-ul!');
-    }
+      },
+      error: (error) => {
+        console.error('Eroare la citirea CSV-ului:', error);
+        alert('A apărut o eroare la interpretarea fișierului.');
+      }
+    });
+
+    // Resetăm input-ul pentru a putea încărca același fișier din nou la nevoie
+    e.target.value = null;
   };
   const handleAddProject = async (e) => {
     e.preventDefault();
@@ -240,12 +234,16 @@ function Admin() {
             Deconectează-te
           </button>
 
-          <button
-            onClick={handleSyncFromSheet}
-            className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition shadow-md"
-          >
-            ⬇️ Importă din Google Sheets
-          </button>
+          {/* Butonul nou de Upload CSV */}
+          <label className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition shadow-md cursor-pointer flex items-center justify-center">
+            ⬇️ Încarcă CSV
+            <input
+              type="file"
+              accept=".csv"
+              onChange={handleFileUpload}
+              className="hidden"
+            />
+          </label>
 
           <button
             onClick={handleExportCSV}
