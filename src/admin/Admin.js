@@ -37,59 +37,59 @@ function Admin() {
     }
   };
 
-
 const handleSyncFromSheet = async () => {
-    const sheetCsvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTc_tyBKVZwtJPpXWaBHxJaAi36SFZawd3FyxNT4KBM3X3ugzynRZGUgtlL9NX69Q2DwZkYIxU-k4-b/pub?gid=2071819533&single=true&output=csv";
+    // Link-ul tău original de Google Sheets
+    const rawSheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTc_tyBKVZwtJPpXWaBHxJaAi36SFZawd3FyxNT4KBM3X3ugzynRZGUgtlL9NX69Q2DwZkYIxU-k4-b/pub?gid=2071819533&single=true&output=csv";
+    
+    // Trecem link-ul prin proxy pentru a evita eroarea de securitate CORS a browserului
+    const proxiedUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(rawSheetUrl)}`;
 
     if (!window.confirm('ATENȚIE: Această acțiune va ȘTERGE TOȚI membrii existenți din baza de date și îi va înlocui cu cei din Google Sheets. Ești sigur?')) {
       return;
     }
 
     try {
-      // 1. Preluăm textul CSV manual folosind fetch (rezolvă erorile de link/CORS ale PapaParse)
-      const response = await fetch(sheetCsvUrl);
+      // Preluăm textul folosind link-ul cu proxy
+      const response = await fetch(proxiedUrl);
       if (!response.ok) {
-        throw new Error(`Nu s-a putut accesa link-ul. Status: ${response.status}`);
+        throw new Error(`Eroare de la server. Status: ${response.status}`);
       }
+      
       const csvText = await response.text();
 
-      // 2. Parsăm textul CSV pe care tocmai l-am descărcat
+      // Parsăm textul CSV descărcat
       Papa.parse(csvText, {
         header: true,
         skipEmptyLines: true,
         complete: async (results) => {
           try {
-            const sheetMembers = results.data; // Membrii din Excel
+            const sheetMembers = results.data;
 
-            // Preluăm toți membrii existenți din Firebase
             const membersCollection = collection(db, 'teamMembers');
             const snapshot = await getDocs(membersCollection);
 
-            // 3. ȘTERGEM ABSOLUT TOT din colecția teamMembers
+            // 1. Ștergem tot din Firebase
             console.log("Ștergem toți membrii vechi...");
             for (const document of snapshot.docs) {
               await deleteDoc(doc(db, 'teamMembers', document.id));
             }
 
-            // 4. ADĂUGĂM toți membrii proaspeți din Google Sheets
+            // 2. Adăugăm membrii noi
             console.log("Adăugăm membrii noi...");
             for (const sheetMember of sheetMembers) {
               const currentName = sheetMember.name?.trim();
               
-              if (!currentName) continue; // Sărim peste rândurile complet goale
+              if (!currentName) continue; 
 
               await addDoc(collection(db, 'teamMembers'), {
                 name: currentName,
-                role: sheetMember.role?.trim() || 'FIIR', // Daca e gol în excel, punem FIIR default
+                role: sheetMember.role?.trim() || 'FIIR',
                 imageUrl: sheetMember.imageUrl?.trim() || '',
-                // Resetăm link-urile sociale
                 socialLinks: { facebook: '', twitter: '', linkedin: '' } 
               });
-              
-              console.log(`Adăugat: ${currentName}`);
             }
 
-            fetchData(); // Reîncărcăm lista vizuală pe ecran
+            fetchData();
             alert('Baza de date a fost ștearsă complet și actualizată cu succes din Google Sheets!');
           } catch (error) {
             console.error('Eroare la interacțiunea cu Firebase:', error);
@@ -98,12 +98,12 @@ const handleSyncFromSheet = async () => {
         },
         error: (error) => {
           console.error('Eroare la formatarea CSV-ului:', error);
-          alert('A apărut o eroare la interpretarea fișierului CSV.');
+          alert('A apărut o eroare la interpretarea textului CSV.');
         }
       });
     } catch (error) {
-      console.error('Eroare de rețea sau link invalid:', error);
-      alert('Nu s-a putut citi fișierul Google Sheets. Verifică link-ul sau conexiunea la internet!');
+      console.error('Eroare de rețea:', error);
+      alert('Nu s-a putut descărca fișierul. Deschide consola (F12) pentru detalii.');
     }
   };
   const handleAddProject = async (e) => {
