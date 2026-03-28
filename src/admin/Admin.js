@@ -38,81 +38,74 @@ function Admin() {
   };
 
 
-  const handleSyncFromSheet = async () => {
-    // ⚠️ ÎNLOCUIEȘTE link-ul de mai jos cu cel generat de tine la Pasul 2
+const handleSyncFromSheet = async () => {
     const sheetCsvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTc_tyBKVZwtJPpXWaBHxJaAi36SFZawd3FyxNT4KBM3X3ugzynRZGUgtlL9NX69Q2DwZkYIxU-k4-b/pub?gid=2071819533&single=true&output=csv";
 
-    if (!window.confirm('Această acțiune va sincroniza baza de date cu tabelul Google Sheets. Ești sigur?')) {
+    if (!window.confirm('ATENȚIE: Această acțiune va ȘTERGE TOȚI membrii existenți din baza de date și îi va înlocui cu cei din Google Sheets. Ești sigur?')) {
       return;
     }
 
-    Papa.parse(sheetCsvUrl, {
-      download: true,
-      header: true,
-      skipEmptyLines: true,
-      complete: async (results) => {
-        try {
-          const sheetMembers = results.data; // Membrii din Excel
-          const sheetNames = sheetMembers.map(m => m.name?.trim()).filter(Boolean);
+    try {
+      // 1. Preluăm textul CSV manual folosind fetch (rezolvă erorile de link/CORS ale PapaParse)
+      const response = await fetch(sheetCsvUrl);
+      if (!response.ok) {
+        throw new Error(`Nu s-a putut accesa link-ul. Status: ${response.status}`);
+      }
+      const csvText = await response.text();
 
-          // Preluăm membrii existenți din Firebase
-          const membersCollection = collection(db, 'teamMembers');
-          const snapshot = await getDocs(membersCollection);
-          const firebaseMembers = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      // 2. Parsăm textul CSV pe care tocmai l-am descărcat
+      Papa.parse(csvText, {
+        header: true,
+        skipEmptyLines: true,
+        complete: async (results) => {
+          try {
+            const sheetMembers = results.data; // Membrii din Excel
 
-          // 1. Ștergem membrii din Firebase care NU mai sunt în Excel
-          for (const fbMember of firebaseMembers) {
-            const fbName = fbMember.name?.trim();
-            if (!sheetNames.includes(fbName)) {
-              await deleteDoc(doc(db, 'teamMembers', fbMember.id));
-              console.log(`Șters: ${fbName}`);
+            // Preluăm toți membrii existenți din Firebase
+            const membersCollection = collection(db, 'teamMembers');
+            const snapshot = await getDocs(membersCollection);
+
+            // 3. ȘTERGEM ABSOLUT TOT din colecția teamMembers
+            console.log("Ștergem toți membrii vechi...");
+            for (const document of snapshot.docs) {
+              await deleteDoc(doc(db, 'teamMembers', document.id));
             }
-          }
 
-          // 2. Adăugăm sau Actualizăm membrii din Excel
-          for (const sheetMember of sheetMembers) {
-            const currentName = sheetMember.name?.trim();
-            if (!currentName) continue; // Sărim peste rândurile goale
+            // 4. ADĂUGĂM toți membrii proaspeți din Google Sheets
+            console.log("Adăugăm membrii noi...");
+            for (const sheetMember of sheetMembers) {
+              const currentName = sheetMember.name?.trim();
+              
+              if (!currentName) continue; // Sărim peste rândurile complet goale
 
-            const existingFbMember = firebaseMembers.find(m => m.name?.trim() === currentName);
-
-            const memberData = {
-              name: currentName,
-              role: sheetMember.role?.trim() || 'FIIR', // Daca e gol în excel, punem FIIR
-              imageUrl: sheetMember.imageUrl?.trim() || '',
-              socialLinks: existingFbMember?.socialLinks || { facebook: '', twitter: '', linkedin: '' } // Păstrăm linkurile sociale dacă existau
-            };
-
-            if (existingFbMember) {
-              // Actualizăm dacă s-a schimbat rolul sau poza
-              if (existingFbMember.role !== memberData.role || existingFbMember.imageUrl !== memberData.imageUrl) {
-                await updateDoc(doc(db, 'teamMembers', existingFbMember.id), {
-                  role: memberData.role,
-                  imageUrl: memberData.imageUrl
-                });
-                console.log(`Actualizat: ${currentName}`);
-              }
-            } else {
-              // Adăugăm dacă nu există deloc
-              await addDoc(collection(db, 'teamMembers'), memberData);
+              await addDoc(collection(db, 'teamMembers'), {
+                name: currentName,
+                role: sheetMember.role?.trim() || 'FIIR', // Daca e gol în excel, punem FIIR default
+                imageUrl: sheetMember.imageUrl?.trim() || '',
+                // Resetăm link-urile sociale
+                socialLinks: { facebook: '', twitter: '', linkedin: '' } 
+              });
+              
               console.log(`Adăugat: ${currentName}`);
             }
+
+            fetchData(); // Reîncărcăm lista vizuală pe ecran
+            alert('Baza de date a fost ștearsă complet și actualizată cu succes din Google Sheets!');
+          } catch (error) {
+            console.error('Eroare la interacțiunea cu Firebase:', error);
+            alert('Eroare la scrierea/ștergerea în baza de date Firebase.');
           }
-
-          fetchData(); // Reîncărcăm lista pe ecran
-          alert('Sincronizarea cu Spreadsheet-ul a fost finalizată!');
-        } catch (error) {
-          console.error('Eroare la procesarea datelor din Firebase:', error);
-          alert('Eroare la salvarea în baza de date.');
+        },
+        error: (error) => {
+          console.error('Eroare la formatarea CSV-ului:', error);
+          alert('A apărut o eroare la interpretarea fișierului CSV.');
         }
-      },
-      error: (error) => {
-        console.error('Eroare la citirea CSV-ului:', error);
-        alert('Nu s-a putut citi fișierul Google Sheets. Verifică link-ul!');
-      }
-    });
+      });
+    } catch (error) {
+      console.error('Eroare de rețea sau link invalid:', error);
+      alert('Nu s-a putut citi fișierul Google Sheets. Verifică link-ul sau conexiunea la internet!');
+    }
   };
-
   const handleAddProject = async (e) => {
     e.preventDefault();
     try {
