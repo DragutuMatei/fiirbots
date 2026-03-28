@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { db, auth } from '../firebase';
-import { collection, addDoc, getDocs, deleteDoc, doc, getDoc, setDoc } from 'firebase/firestore';
+import { collection, updateDoc, addDoc, getDocs, deleteDoc, doc, getDoc, setDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import Papa from 'papaparse';
 
 function Admin() {
   const navigate = useNavigate();
@@ -34,6 +35,82 @@ function Admin() {
     } catch (error) {
       console.error('Eroare la preluarea datelor:', error);
     }
+  };
+
+
+  const handleSyncFromSheet = async () => {
+    // ⚠️ ÎNLOCUIEȘTE link-ul de mai jos cu cel generat de tine la Pasul 2
+    const sheetCsvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTc_tyBKVZwtJPpXWaBHxJaAi36SFZawd3FyxNT4KBM3X3ugzynRZGUgtlL9NX69Q2DwZkYIxU-k4-b/pub?gid=2071819533&single=true&output=csv";
+
+    if (!window.confirm('Această acțiune va sincroniza baza de date cu tabelul Google Sheets. Ești sigur?')) {
+      return;
+    }
+
+    Papa.parse(sheetCsvUrl, {
+      download: true,
+      header: true,
+      skipEmptyLines: true,
+      complete: async (results) => {
+        try {
+          const sheetMembers = results.data; // Membrii din Excel
+          const sheetNames = sheetMembers.map(m => m.name?.trim()).filter(Boolean);
+
+          // Preluăm membrii existenți din Firebase
+          const membersCollection = collection(db, 'teamMembers');
+          const snapshot = await getDocs(membersCollection);
+          const firebaseMembers = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+          // 1. Ștergem membrii din Firebase care NU mai sunt în Excel
+          for (const fbMember of firebaseMembers) {
+            const fbName = fbMember.name?.trim();
+            if (!sheetNames.includes(fbName)) {
+              await deleteDoc(doc(db, 'teamMembers', fbMember.id));
+              console.log(`Șters: ${fbName}`);
+            }
+          }
+
+          // 2. Adăugăm sau Actualizăm membrii din Excel
+          for (const sheetMember of sheetMembers) {
+            const currentName = sheetMember.name?.trim();
+            if (!currentName) continue; // Sărim peste rândurile goale
+
+            const existingFbMember = firebaseMembers.find(m => m.name?.trim() === currentName);
+
+            const memberData = {
+              name: currentName,
+              role: sheetMember.role?.trim() || 'FIIR', // Daca e gol în excel, punem FIIR
+              imageUrl: sheetMember.imageUrl?.trim() || '',
+              socialLinks: existingFbMember?.socialLinks || { facebook: '', twitter: '', linkedin: '' } // Păstrăm linkurile sociale dacă existau
+            };
+
+            if (existingFbMember) {
+              // Actualizăm dacă s-a schimbat rolul sau poza
+              if (existingFbMember.role !== memberData.role || existingFbMember.imageUrl !== memberData.imageUrl) {
+                await updateDoc(doc(db, 'teamMembers', existingFbMember.id), {
+                  role: memberData.role,
+                  imageUrl: memberData.imageUrl
+                });
+                console.log(`Actualizat: ${currentName}`);
+              }
+            } else {
+              // Adăugăm dacă nu există deloc
+              await addDoc(collection(db, 'teamMembers'), memberData);
+              console.log(`Adăugat: ${currentName}`);
+            }
+          }
+
+          fetchData(); // Reîncărcăm lista pe ecran
+          alert('Sincronizarea cu Spreadsheet-ul a fost finalizată!');
+        } catch (error) {
+          console.error('Eroare la procesarea datelor din Firebase:', error);
+          alert('Eroare la salvarea în baza de date.');
+        }
+      },
+      error: (error) => {
+        console.error('Eroare la citirea CSV-ului:', error);
+        alert('Nu s-a putut citi fișierul Google Sheets. Verifică link-ul!');
+      }
+    });
   };
 
   const handleAddProject = async (e) => {
@@ -129,6 +206,35 @@ function Admin() {
     }
   };
 
+  const handleExportCSV = () => {
+    // 1. Aplatizăm datele ca să arate bine în tabel
+    // Extragem link-urile din interiorul obiectului socialLinks
+    const exportData = members.map(m => ({
+      name: m.name || '',
+      role: m.role || '',
+      imageUrl: m.imageUrl || '',
+      facebook: m.socialLinks?.facebook || '',
+      twitter: m.socialLinks?.twitter || '',
+      linkedin: m.socialLinks?.linkedin || ''
+    }));
+
+    // 2. Generăm CSV-ul cu PapaParse
+    const csv = Papa.unparse(exportData);
+
+    // 3. Creăm un link temporar pentru a forța browserul să descarce fișierul
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'membri_fiir.csv'); // Numele fișierului descărcat
+    document.body.appendChild(link);
+
+    link.click(); // Declansăm descărcarea
+
+    // Curățăm link-ul temporar
+    document.body.removeChild(link);
+  };
 
   const handleSignOut = async () => {
     await auth.signOut();
@@ -139,9 +245,28 @@ function Admin() {
     <section className="py-20 bg-cream">
       <div className="container mx-auto px-6">
         <h2 className="text-3xl md:text-4xl font-bold text-center text-navy mb-16 section-title">Dashboard Admin</h2>
-        <button onClick={handleSignOut} className="bg-red-500 text-white px-6 py-3 rounded-lg mb-8 hover:bg-red-600 transition">
-          Deconectează-te
-        </button>
+        <div className="flex flex-wrap gap-4 mb-8">
+          <button
+            onClick={handleSignOut}
+            className="bg-red-500 text-white px-6 py-3 rounded-lg hover:bg-red-600 transition"
+          >
+            Deconectează-te
+          </button>
+
+          <button
+            onClick={handleSyncFromSheet}
+            className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition shadow-md"
+          >
+            ⬇️ Importă din Google Sheets
+          </button>
+
+          <button
+            onClick={handleExportCSV}
+            className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition shadow-md"
+          >
+            ⬆️ Exportă în CSV
+          </button>
+        </div>
 
         {/* Add Recruitment Link Form */}
         <div className="bg-white p-8 rounded-xl shadow-lg mb-12">
