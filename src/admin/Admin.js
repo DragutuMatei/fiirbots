@@ -37,55 +37,49 @@ function Admin() {
     }
   };
 
-const handleSyncFromSheet = async () => {
-    // Link-ul tău original de Google Sheets
+  const handleSyncFromSheet = async () => {
     const rawSheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTc_tyBKVZwtJPpXWaBHxJaAi36SFZawd3FyxNT4KBM3X3ugzynRZGUgtlL9NX69Q2DwZkYIxU-k4-b/pub?gid=2071819533&single=true&output=csv";
-    
-    // Trecem link-ul prin proxy pentru a evita eroarea de securitate CORS a browserului
-    const proxiedUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(rawSheetUrl)}`;
+
+    // Am schimbat proxy-ul cu corsproxy.io, care este mult mai stabil
+    const proxiedUrl = `https://corsproxy.io/?${encodeURIComponent(rawSheetUrl)}`;
 
     if (!window.confirm('ATENȚIE: Această acțiune va ȘTERGE TOȚI membrii existenți din baza de date și îi va înlocui cu cei din Google Sheets. Ești sigur?')) {
       return;
     }
 
     try {
-      // Preluăm textul folosind link-ul cu proxy
       const response = await fetch(proxiedUrl);
       if (!response.ok) {
         throw new Error(`Eroare de la server. Status: ${response.status}`);
       }
-      
+
       const csvText = await response.text();
 
-      // Parsăm textul CSV descărcat
       Papa.parse(csvText, {
         header: true,
         skipEmptyLines: true,
         complete: async (results) => {
           try {
             const sheetMembers = results.data;
-
             const membersCollection = collection(db, 'teamMembers');
             const snapshot = await getDocs(membersCollection);
 
-            // 1. Ștergem tot din Firebase
             console.log("Ștergem toți membrii vechi...");
             for (const document of snapshot.docs) {
               await deleteDoc(doc(db, 'teamMembers', document.id));
             }
 
-            // 2. Adăugăm membrii noi
             console.log("Adăugăm membrii noi...");
             for (const sheetMember of sheetMembers) {
               const currentName = sheetMember.name?.trim();
-              
-              if (!currentName) continue; 
+
+              if (!currentName) continue;
 
               await addDoc(collection(db, 'teamMembers'), {
                 name: currentName,
                 role: sheetMember.role?.trim() || 'FIIR',
                 imageUrl: sheetMember.imageUrl?.trim() || '',
-                socialLinks: { facebook: '', twitter: '', linkedin: '' } 
+                socialLinks: { facebook: '', twitter: '', linkedin: '' }
               });
             }
 
@@ -93,7 +87,7 @@ const handleSyncFromSheet = async () => {
             alert('Baza de date a fost ștearsă complet și actualizată cu succes din Google Sheets!');
           } catch (error) {
             console.error('Eroare la interacțiunea cu Firebase:', error);
-            alert('Eroare la scrierea/ștergerea în baza de date Firebase.');
+            alert('Eroare la scrierea/ștergerea în Firebase. Ai oprit Adblocker-ul?');
           }
         },
         error: (error) => {
@@ -103,7 +97,7 @@ const handleSyncFromSheet = async () => {
       });
     } catch (error) {
       console.error('Eroare de rețea:', error);
-      alert('Nu s-a putut descărca fișierul. Deschide consola (F12) pentru detalii.');
+      alert('Nu s-a putut descărca fișierul. Asigură-te că ai oprit Adblocker-ul!');
     }
   };
   const handleAddProject = async (e) => {
