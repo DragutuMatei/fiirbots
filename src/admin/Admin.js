@@ -221,6 +221,38 @@ function Admin() {
           <h3 className="text-2xl font-bold text-navy mb-6">Proiecte Existente</h3>
           <ul className="space-y-4">
             {projects.map(p => (
+              <li
+                key={p.id}
+                className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-4 bg-gray-50 border border-gray-100 rounded-lg hover:shadow-md transition-shadow duration-200"
+              >
+                <span className="font-semibold text-gray-800 text-lg mb-4 sm:mb-0">
+                  {p.title}
+                </span>
+
+                {/* Zona de butoane grupate */}
+                <div className="flex w-full sm:w-auto space-x-3 justify-end">
+                  <Link
+                    to={`/admin/edit/${p.id}`}
+                    className="flex-1 sm:flex-none text-center bg-yellow-500 text-white px-5 py-2 rounded-md font-medium hover:bg-yellow-600 hover:shadow-lg transition-all"
+                  >
+                    Editează
+                  </Link>
+                  <button
+                    onClick={() => handleDelete('projects', p.id)}
+                    className="flex-1 sm:flex-none text-center bg-red-500 text-white px-5 py-2 rounded-md font-medium hover:bg-red-600 hover:shadow-lg transition-all"
+                  >
+                    Șterge
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+        {/* Projects List
+        <div className="bg-white p-8 rounded-xl shadow-lg mb-12">
+          <h3 className="text-2xl font-bold text-navy mb-6">Proiecte Existente</h3>
+          <ul className="space-y-4">
+            {projects.map(p => (
               <li key={p.id} className="flex justify-between items-center">
                 <span>{p.title}</span>
                 <Link
@@ -238,7 +270,7 @@ function Admin() {
               </li>
             ))}
           </ul>
-        </div>
+        </div> */}
 
         {/* Add Member Form */}
         <div className="bg-white p-8 rounded-xl shadow-lg mb-12">
