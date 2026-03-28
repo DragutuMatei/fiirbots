@@ -236,7 +236,7 @@ function Admin() {
 
           {/* Butonul nou de Upload CSV */}
           <label className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition shadow-md cursor-pointer flex items-center justify-center">
-            ⬇️ Încarcă CSV
+            ⬇️ Încarcă CSV cu membrii
             <input
               type="file"
               accept=".csv"
@@ -249,7 +249,7 @@ function Admin() {
             onClick={handleExportCSV}
             className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition shadow-md"
           >
-            ⬆️ Exportă în CSV
+            ⬆️ Exportă în CSV membrii actuali
           </button>
         </div>
 
