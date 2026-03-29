@@ -36,7 +36,7 @@ function Team() {
       <div className="container mx-auto px-6">
         <h2 className="text-3xl md:text-4xl font-bold text-center text-cream mb-16 section-title">Echipa Noastră</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {teamMembers.slice(0, showAll ? teamMembers.length : 5).map((member, index) => (
+          {teamMembers.slice(0, showAll ? teamMembers.length : 8).map((member, index) => (
             <div key={member.id} className="team-member bg-cream rounded-xl overflow-hidden shadow-lg text-center">
               <div className="h-48 flex items-center justify-center bg-skyblue">
                 {member.imageUrl ? (
