@@ -1,29 +1,21 @@
 import React, { useState } from 'react';
 import { db } from '../firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore'; 
-import { useNavigate } from 'react-router-dom';
 
-function AddTeamMember() {
+function AddTeamMember({ onAdd }) {
   const [name, setName] = useState('');
   const [role, setRole] = useState('');
-  // În loc de text, stocăm fișierul propriu-zis
   const [imageFile, setImageFile] = useState(null); 
   const [facebook, setFacebook] = useState('');
   const [linkedin, setLinkedin] = useState('');
   const [twitter, setTwitter] = useState('');
   const [order, setOrder] = useState('');
-  
-  // Stare pentru a arăta că se încarcă datele
   const [isUploading, setIsUploading] = useState(false); 
-  const navigate = useNavigate();
 
-  // Funcția care urcă imaginea pe Cloudinary
   const uploadImageToCloudinary = async (file) => {
     const formData = new FormData();
     formData.append('file', file);
-    
-    // ÎNLOCUIEȘTE CU DATELE TALE DE LA CLOUDINARY
-    formData.append('upload_preset', 'fiirbots_website'); 
+    formData.append('upload_preset', 'fiirbots_website'); // Completează cu datele tale Cloudinary
     const cloudName = 'dcndk7eiv'; 
 
     const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
@@ -32,29 +24,24 @@ function AddTeamMember() {
     });
 
     const data = await response.json();
-    if (!response.ok) {
-      throw new Error(data.error.message || 'Eroare la încărcarea imaginii');
-    }
-    return data.secure_url; // Acesta este link-ul curat către imagine
+    if (!response.ok) throw new Error(data.error.message || 'Eroare la încărcare');
+    return data.secure_url; 
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsUploading(true); // Începem procesul de încărcare
+    setIsUploading(true); 
 
     try {
       let finalImageUrl = '';
-
-      // Dacă utilizatorul a selectat o imagine, o urcăm prima dată
       if (imageFile) {
         finalImageUrl = await uploadImageToCloudinary(imageFile);
       }
 
-      // După ce avem link-ul, salvăm în Firebase
       await addDoc(collection(db, 'teamMembers'), {
         name,
         role,
-        imageUrl: finalImageUrl, // Salvăm link-ul returnat de Cloudinary
+        imageUrl: finalImageUrl,
         socialLinks: {
           facebook: facebook || null,
           linkedin: linkedin || null,
@@ -65,77 +52,41 @@ function AddTeamMember() {
       });
 
       alert('Membru adăugat cu succes!');
-      navigate('/admin');
+      
+      // Golim formularul
+      setName(''); setRole(''); setImageFile(null); setFacebook(''); setLinkedin(''); setTwitter(''); setOrder('');
+      
+      // Dăm semnal către Admin.js să facă refresh la listă
+      if (onAdd) onAdd(); 
+
     } catch (error) {
-      console.error(error);
       alert('Eroare: ' + error.message);
     } finally {
-      setIsUploading(false); // Oprim starea de încărcare indiferent de rezultat
+      setIsUploading(false);
     }
   };
 
   return (
-    <div className="container py-10">
-      <h2 className="text-2xl font-bold mb-6 text-center">Adaugă Membru Echipă</h2>
-      <div className="row">
-        <div className="col-md-6 mx-auto">
-          <div className="card shadow-lg p-6 bg-white rounded-xl">
-            <div className="card-body">
-              <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                  <label className="form-label">Nume</label>
-                  <input type="text" className="form-control" value={name} onChange={(e) => setName(e.target.value)} required />
-                </div>
-                
-                <div className="mb-3">
-                  <label className="form-label">Rol</label>
-                  <input type="text" className="form-control" value={role} onChange={(e) => setRole(e.target.value)} required />
-                </div>
-                
-                {/* NOU: Câmpul de tip 'file' pentru imagine */}
-                <div className="mb-3">
-                  <label className="form-label">Încarcă Fotografie (opțional)</label>
-                  <input 
-                    type="file" 
-                    className="form-control" 
-                    accept="image/*" // Permite doar imagini
-                    onChange={(e) => setImageFile(e.target.files[0])} 
-                  />
-                  {imageFile && <small className="text-gray-500 mt-1">Fișier selectat: {imageFile.name}</small>}
-                </div>
-
-                <div className="mb-3">
-                  <label className="form-label">Link Facebook (opțional)</label>
-                  <input type="text" className="form-control" value={facebook} onChange={(e) => setFacebook(e.target.value)} />
-                </div>
-                
-                <div className="mb-3">
-                  <label className="form-label">Link LinkedIn (opțional)</label>
-                  <input type="text" className="form-control" value={linkedin} onChange={(e) => setLinkedin(e.target.value)} />
-                </div>
-                
-                <div className="mb-3">
-                  <label className="form-label">Link Twitter (opțional)</label>
-                  <input type="text" className="form-control" value={twitter} onChange={(e) => setTwitter(e.target.value)} />
-                </div>
-                
-                <div className="mb-3">
-                  <label className="form-label">Ordine afișare (1 apare primul)</label>
-                  <input type="number" className="form-control" value={order} onChange={(e) => setOrder(e.target.value)} min="1" />
-                </div>
-                
-                <button 
-                  type="submit" 
-                  className={`btn btn-primary w-full mt-4 ${isUploading ? 'opacity-50 cursor-not-allowed' : ''}`}
-                  disabled={isUploading}
-                >
-                  {isUploading ? 'Se încarcă și se salvează...' : 'Adaugă Membru'}
-                </button>
-              </form>
-            </div>
-          </div>
+    <div className="bg-white p-6 sm:p-8 rounded-xl shadow-lg mb-12">
+      <h3 className="text-xl sm:text-2xl font-bold text-navy mb-6">Adaugă Membru Echipă</h3>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <input type="text" placeholder="Nume" className="w-full p-3 border border-gray-300 rounded-lg" value={name} onChange={(e) => setName(e.target.value)} required />
+        <input type="text" placeholder="Rol" className="w-full p-3 border border-gray-300 rounded-lg" value={role} onChange={(e) => setRole(e.target.value)} required />
+        
+        <div className="w-full p-3 border border-gray-300 rounded-lg bg-gray-50">
+          <label className="text-sm text-gray-600 block mb-1">Încarcă Fotografie (Cloudinary)</label>
+          <input type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files[0])} />
         </div>
-      </div>
+
+        <input type="url" placeholder="Link Facebook (opțional)" className="w-full p-3 border border-gray-300 rounded-lg" value={facebook} onChange={(e) => setFacebook(e.target.value)} />
+        <input type="url" placeholder="Link LinkedIn (opțional)" className="w-full p-3 border border-gray-300 rounded-lg" value={linkedin} onChange={(e) => setLinkedin(e.target.value)} />
+        <input type="url" placeholder="Link Twitter (opțional)" className="w-full p-3 border border-gray-300 rounded-lg" value={twitter} onChange={(e) => setTwitter(e.target.value)} />
+        <input type="number" placeholder="Ordine afișare (1, 2, 3...)" className="w-full p-3 border border-gray-300 rounded-lg" value={order} onChange={(e) => setOrder(e.target.value)} min="1" />
+        
+        <button type="submit" disabled={isUploading} className={`bg-skyblue text-navy font-bold px-6 py-3 rounded-lg transition w-full sm:w-auto ${isUploading ? 'opacity-50' : 'hover:bg-opacity-90'}`}>
+          {isUploading ? 'Se încarcă...' : 'Adaugă Membru'}
+        </button>
+      </form>
     </div>
   );
 }

@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { db } from '../firebase';
-// Importăm serverTimestamp
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore'; 
-import { useNavigate } from 'react-router-dom';
 
-function AddCompetition() {
+function AddCompetition({ onAdd }) {
   const [name, setName] = useState('');
   const [type, setType] = useState('national');
   const [description, setDescription] = useState('');
@@ -12,13 +10,36 @@ function AddCompetition() {
   const [date, setDate] = useState('');
   const [status, setStatus] = useState('');
   const [results, setResults] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
-  const [order, setOrder] = useState(''); // State nou
-  const navigate = useNavigate();
+  const [imageFile, setImageFile] = useState(null); // Înlocuiește imageUrl
+  const [order, setOrder] = useState(''); 
+  const [isUploading, setIsUploading] = useState(false);
+
+  const uploadImageToCloudinary = async (file) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', 'fiirbots_website'); // <-- AICI
+    const cloudName = 'dcndk7eiv'; // <-- AICI
+
+    const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+      method: 'POST',
+      body: formData,
+    });
+
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error.message || 'Eroare la încărcare');
+    return data.secure_url; 
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsUploading(true);
+
     try {
+      let finalImageUrl = '';
+      if (imageFile) {
+        finalImageUrl = await uploadImageToCloudinary(imageFile);
+      }
+
       await addDoc(collection(db, 'competitions'), {
         name,
         type,
@@ -27,72 +48,51 @@ function AddCompetition() {
         date,
         status,
         results: results || null,
-        imageUrl,
-        order: order ? Number(order) : 999, // Salvăm ordinea
-        createdAt: serverTimestamp() // Salvăm timestamp-ul
+        imageUrl: finalImageUrl,
+        createdAt: serverTimestamp(),
+        order: order ? Number(order) : 999 
       });
+
       alert('Competiție adăugată cu succes!');
-      navigate('/admin');
+      
+      // Reset formulare
+      setName(''); setType('national'); setDescription(''); setLocation(''); setDate(''); setStatus(''); setResults(''); setImageFile(null); setOrder('');
+      if (onAdd) onAdd(); // Refresh listă
     } catch (error) {
-      console.error(error);
-      alert('Eroare la adăugarea competiției: ' + error.message);
+      alert('Eroare: ' + error.message);
+    } finally {
+      setIsUploading(false);
     }
   };
 
   return (
-    <div className="container py-10">
-      <h2 className="text-2xl font-bold mb-6 text-center">Adaugă Competiție</h2>
-      <div className="row">
-        <div className="col-md-6 mx-auto">
-          <div className="card shadow-lg p-6 bg-white rounded-xl">
-            <div className="card-body">
-              <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                  <label className="form-label">Nume Competiție</label>
-                  <input type="text" className="form-control" value={name} onChange={(e) => setName(e.target.value)} required />
-                </div>
-                <div className="mb-3">
-                  <label className="form-label">Tip</label>
-                  <select className="form-control" value={type} onChange={(e) => setType(e.target.value)} required>
-                    <option value="national">Națională</option>
-                    <option value="international">Internațională</option>
-                  </select>
-                </div>
-                <div className="mb-3">
-                  <label className="form-label">Descriere</label>
-                  <textarea className="form-control" value={description} onChange={(e) => setDescription(e.target.value)} required></textarea>
-                </div>
-                <div className="mb-3">
-                  <label className="form-label">Locație</label>
-                  <input type="text" className="form-control" value={location} onChange={(e) => setLocation(e.target.value)} required />
-                </div>
-                <div className="mb-3">
-                  <label className="form-label">Data (ex. 15-16 Martie 2024)</label>
-                  <input type="text" className="form-control" value={date} onChange={(e) => setDate(e.target.value)} required />
-                </div>
-                <div className="mb-3">
-                  <label className="form-label">Status (ex. Confirmat, În pregătire)</label>
-                  <input type="text" className="form-control" value={status} onChange={(e) => setStatus(e.target.value)} required />
-                </div>
-                <div className="mb-3">
-                  <label className="form-label">Rezultate (opțional)</label>
-                  <input type="text" className="form-control" value={results} onChange={(e) => setResults(e.target.value)} />
-                </div>
-                <div className="mb-3">
-                  <label className="form-label">URL Imagine (opțional)</label>
-                  <input type="url" className="form-control" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} />
-                </div>
-                {/* Input pentru ordine */}
-                <div className="mb-3">
-                  <label className="form-label">Ordine afișare (1 apare primul)</label>
-                  <input type="number" className="form-control" value={order} onChange={(e) => setOrder(e.target.value)} placeholder="Ex: 1, 2, 3..." min="1" />
-                </div>
-                <button type="submit" className="btn btn-primary w-full mt-4">Adaugă Competiție</button>
-              </form>
-            </div>
-          </div>
+    <div className="bg-white p-6 sm:p-8 rounded-xl shadow-lg mb-12">
+      <h3 className="text-xl sm:text-2xl font-bold text-navy mb-6">Adaugă Competiție</h3>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <input type="text" placeholder="Nume Competiție" className="w-full p-3 border border-gray-300 rounded-lg" value={name} onChange={(e) => setName(e.target.value)} required />
+        
+        <select className="w-full p-3 border border-gray-300 rounded-lg" value={type} onChange={(e) => setType(e.target.value)} required>
+          <option value="national">Națională</option>
+          <option value="international">Internațională</option>
+        </select>
+        
+        <textarea placeholder="Descriere" className="w-full p-3 border border-gray-300 rounded-lg h-24" value={description} onChange={(e) => setDescription(e.target.value)} required></textarea>
+        <input type="text" placeholder="Locație" className="w-full p-3 border border-gray-300 rounded-lg" value={location} onChange={(e) => setLocation(e.target.value)} required />
+        <input type="text" placeholder="Data (ex. 15-16 Martie 2024)" className="w-full p-3 border border-gray-300 rounded-lg" value={date} onChange={(e) => setDate(e.target.value)} required />
+        <input type="text" placeholder="Status (ex. Confirmat, În pregătire)" className="w-full p-3 border border-gray-300 rounded-lg" value={status} onChange={(e) => setStatus(e.target.value)} required />
+        <input type="text" placeholder="Rezultate (opțional)" className="w-full p-3 border border-gray-300 rounded-lg" value={results} onChange={(e) => setResults(e.target.value)} />
+        
+        <div className="w-full p-3 border border-gray-300 rounded-lg bg-gray-50">
+          <label className="text-sm text-gray-600 block mb-1">Încarcă Fotografie Competiție (Cloudinary)</label>
+          <input type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files[0])} />
         </div>
-      </div>
+
+        <input type="number" placeholder="Ordine afișare (1, 2, 3...)" className="w-full p-3 border border-gray-300 rounded-lg" value={order} onChange={(e) => setOrder(e.target.value)} min="1" />
+        
+        <button type="submit" disabled={isUploading} className={`bg-skyblue text-navy font-bold px-6 py-3 rounded-lg transition w-full sm:w-auto ${isUploading ? 'opacity-50' : 'hover:bg-opacity-90'}`}>
+          {isUploading ? 'Se încarcă...' : 'Adaugă Competiție'}
+        </button>
+      </form>
     </div>
   );
 }

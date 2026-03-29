@@ -1,113 +1,83 @@
 import React, { useState } from 'react';
 import { db } from '../firebase';
-// Am adăugat serverTimestamp
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore'; 
-import { useNavigate } from 'react-router-dom';
 
-function AddProject() {
+function AddProject({ onAdd }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [tags, setTags] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
+  const [imageFile, setImageFile] = useState(null); // Înlocuiește imageUrl
   const [detailsUrl, setDetailsUrl] = useState('');
-  // State nou pentru ordine
   const [order, setOrder] = useState(''); 
-  const navigate = useNavigate();
+  const [isUploading, setIsUploading] = useState(false);
+
+  const uploadImageToCloudinary = async (file) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', 'fiirbots_website'); // <-- AICI
+    const cloudName = 'dcndk7eiv'; // <-- AICI
+
+    const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+      method: 'POST',
+      body: formData,
+    });
+
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error.message || 'Eroare la încărcare');
+    return data.secure_url; 
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsUploading(true);
+
     try {
+      let finalImageUrl = '';
+      if (imageFile) {
+        finalImageUrl = await uploadImageToCloudinary(imageFile);
+      }
+
       await addDoc(collection(db, 'projects'), {
         title,
         description,
-        tags: tags.split(',').map(tag => tag.trim()),
-        imageUrl,
+        tags: tags.split(',').map(tag => tag.trim()).filter(tag => tag !== ''),
+        imageUrl: finalImageUrl,
         detailsUrl,
-        // Salvăm timpul exact și ordinea (dacă e goală, punem 999 ca să apară la final)
         createdAt: serverTimestamp(),
         order: order ? Number(order) : 999 
       });
       alert('Proiect adăugat cu succes!');
-      navigate('/admin');
+      
+      // Reset formulare
+      setTitle(''); setDescription(''); setTags(''); setImageFile(null); setDetailsUrl(''); setOrder('');
+      if (onAdd) onAdd(); // Refresh listă
     } catch (error) {
-      console.error(error);
-      alert('Eroare la adăugarea proiectului: ' + error.message);
+      alert('Eroare: ' + error.message);
+    } finally {
+      setIsUploading(false);
     }
   };
 
   return (
-    <div className="container">
-      <h2>Adaugă Proiect</h2>
-      <div className="row">
-        <div className="col-md-6 mx-auto">
-          <div className="card">
-            <div className="card-body">
-              <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                  <label className="form-label">Titlu</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    required
-                  />
-                </div>
-                <div className="mb-3">
-                  <label className="form-label">Descriere</label>
-                  <textarea
-                    className="form-control"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    required
-                  ></textarea>
-                </div>
-                <div className="mb-3">
-                  <label className="form-label">Tag-uri (separate prin virgulă)</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    value={tags}
-                    onChange={(e) => setTags(e.target.value)}
-                    placeholder="ex. Robotică, AI, Computer Vision"
-                  />
-                </div>
-                <div className="mb-3">
-                  <label className="form-label">URL Imagine</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    value={imageUrl}
-                    onChange={(e) => setImageUrl(e.target.value)}
-                  />
-                </div>
-                <div className="mb-3">
-                  <label className="form-label">URL Detalii (opțional)</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    value={detailsUrl}
-                    onChange={(e) => setDetailsUrl(e.target.value)}
-                  />
-                </div>
-                {/* Input nou pentru Ordine */}
-                <div className="mb-3">
-                  <label className="form-label">Ordine afișare (1 apare primul, opțional)</label>
-                  <input
-                    type="number"
-                    className="form-control"
-                    value={order}
-                    onChange={(e) => setOrder(e.target.value)}
-                    placeholder="Ex: 1, 2, 3..."
-                    min="1"
-                  />
-                </div>
-                <button type="submit" className="btn btn-primary">Adaugă Proiect</button>
-              </form>
-            </div>
-          </div>
+    <div className="bg-white p-6 sm:p-8 rounded-xl shadow-lg mb-12">
+      <h3 className="text-xl sm:text-2xl font-bold text-navy mb-6">Adaugă Proiect</h3>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <input type="text" placeholder="Titlu" className="w-full p-3 border border-gray-300 rounded-lg" value={title} onChange={(e) => setTitle(e.target.value)} required />
+        <textarea placeholder="Descriere" className="w-full p-3 border border-gray-300 rounded-lg h-24" value={description} onChange={(e) => setDescription(e.target.value)} required></textarea>
+        <input type="text" placeholder="Tag-uri (separate prin virgulă)" className="w-full p-3 border border-gray-300 rounded-lg" value={tags} onChange={(e) => setTags(e.target.value)} />
+        
+        <div className="w-full p-3 border border-gray-300 rounded-lg bg-gray-50">
+          <label className="text-sm text-gray-600 block mb-1">Încarcă Fotografie Proiect (Cloudinary)</label>
+          <input type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files[0])} />
         </div>
-      </div>
+
+        <input type="url" placeholder="URL Detalii (link extern)" className="w-full p-3 border border-gray-300 rounded-lg" value={detailsUrl} onChange={(e) => setDetailsUrl(e.target.value)} />
+        <input type="number" placeholder="Ordine afișare (1, 2, 3...)" className="w-full p-3 border border-gray-300 rounded-lg" value={order} onChange={(e) => setOrder(e.target.value)} min="1" />
+        
+        <button type="submit" disabled={isUploading} className={`bg-skyblue text-navy font-bold px-6 py-3 rounded-lg transition w-full sm:w-auto ${isUploading ? 'opacity-50' : 'hover:bg-opacity-90'}`}>
+          {isUploading ? 'Se încarcă...' : 'Adaugă Proiect'}
+        </button>
+      </form>
     </div>
   );
 }
