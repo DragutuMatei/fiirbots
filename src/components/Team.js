@@ -37,33 +37,45 @@ function Team() {
         <h2 className="text-3xl md:text-4xl font-bold text-center text-cream mb-16 section-title">Echipa Noastră</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {teamMembers.slice(0, showAll ? teamMembers.length : 8).map((member, index) => (
-            <div key={member.id} className="team-member bg-cream rounded-xl overflow-hidden shadow-lg text-center">
-              <div className="h-48 flex items-center justify-center bg-skyblue">
+            // Am adăugat clasa 'group' pentru efectul de hover pe imagine
+            <div key={member.id} className="team-member bg-cream rounded-xl overflow-hidden shadow-lg text-center group flex flex-col">
+              
+              {/* NOU: aspect-square în loc de h-48. Imaginea va fi mereu un pătrat perfect, indiferent de lățimea ecranului */}
+              <div className="w-full aspect-square flex items-center justify-center bg-skyblue overflow-hidden shrink-0">
                 {member.imageUrl ? (
-                  <img src={member.imageUrl} alt={member.name} className="w-full h-full object-cover" />
+                  <img 
+                    src={member.imageUrl} 
+                    alt={member.name} 
+                    // NOU: object-top (ține capul în cadru) și efect de scale la hover
+                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" 
+                  />
                 ) : (
-                  <svg className="w-32 h-32 text-navy" viewBox="0 0 100 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <svg className="w-1/3 h-1/3 text-navy opacity-50" viewBox="0 0 100 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="50" cy="35" r="20" />
                     <path d="M50,60 C33.4315,60 20,73.4315 20,90 L80,90 C80,73.4315 66.5685,60 50,60 Z" />
                   </svg>
                 )}
               </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-navy">{member.name}</h3>
-                <p className="text-gray-600 mb-4">{member.role}</p>
-                <div className="flex justify-center space-x-4">
+              
+              <div className="p-6 flex flex-col flex-grow justify-between">
+                <div>
+                  <h3 className="text-xl font-bold text-navy">{member.name}</h3>
+                  <p className="text-gray-600 mb-4">{member.role}</p>
+                </div>
+                
+                <div className="flex justify-center space-x-4 mt-auto">
                   {member.socialLinks?.facebook && (
-                    <a href={member.socialLinks.facebook} className="text-purple hover:text-navy transition">
+                    <a href={member.socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="text-purple hover:text-navy transition">
                       <i className="fab fa-facebook-f w-5 h-5" />
                     </a>
                   )}
                   {member.socialLinks?.twitter && (
-                    <a href={member.socialLinks.twitter} className="text-purple hover:text-navy transition">
+                    <a href={member.socialLinks.twitter} target="_blank" rel="noopener noreferrer" className="text-purple hover:text-navy transition">
                       <i className="fab fa-twitter w-5 h-5" />
                     </a>
                   )}
                   {member.socialLinks?.linkedin && (
-                    <a href={member.socialLinks.linkedin} className="text-purple hover:text-navy transition">
+                    <a href={member.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="text-purple hover:text-navy transition">
                       <i className="fab fa-linkedin-in w-5 h-5" />
                     </a>
                   )}
@@ -72,7 +84,9 @@ function Team() {
             </div>
           ))}
         </div>
-        {!showAll && teamMembers.length > 5 && (
+        
+        {/* Corectat la > 8 pentru a se potrivi cu slice-ul de mai sus */}
+        {!showAll && teamMembers.length > 8 && (
           <div className="mt-16 text-center">
             <button onClick={() => setShowAll(true)} className="bg-skyblue text-navy px-8 py-3 rounded-lg font-medium hover:bg-opacity-90 transition shadow-lg">
               Vezi Întreaga Echipă
