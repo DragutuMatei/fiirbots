@@ -46,51 +46,67 @@ function Competitions() {
       <div className="container mx-auto px-6">
         <h2 className="text-3xl md:text-4xl font-bold text-center text-navy mb-16 section-title">Competiții</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="bg-white p-6 rounded-xl shadow-lg">
-            <h3 className="text-2xl font-bold text-navy mb-6">Competiții Naționale</h3>
+          
+          {/* SECȚIUNEA NAȚIONALĂ */}
+          <div className="bg-white p-6 rounded-xl shadow-lg flex flex-col gap-6">
+            <h3 className="text-2xl font-bold text-navy border-b pb-2">Competiții Naționale</h3>
             {nationalComps.map(comp => (
-              <div key={comp.id} className="competition-item border-l-4 border-purple pl-4 py-2">
-                <h4 className="text-lg font-semibold text-navy">{comp.name}</h4>
-                <div className="h-32 my-2">
+              <div key={comp.id} className="competition-item border-l-4 border-purple pl-4 py-2 flex flex-col">
+                <h4 className="text-lg font-semibold text-navy mb-2">{comp.name}</h4>
+                
+                {/* AM ÎNLOCUIT h-32 cu aspect-video și object-cover */}
+                <div className="w-full aspect-video mb-4 overflow-hidden rounded bg-gray-100 flex items-center justify-center shrink-0">
                   {comp.imageUrl ? (
-                    <img src={comp.imageUrl} alt={comp.name} className="w-full h-full object-cover rounded" />
+                    <img src={comp.imageUrl} alt={comp.name} className="w-full h-full object-cover" />
                   ) : (
-                    <svg className="w-16 h-16 text-navy mx-auto" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg className="w-16 h-16 text-navy opacity-50 mx-auto" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-9h10v2H7z" />
                     </svg>
                   )}
                 </div>
-                <p className="text-gray-700 mb-2">{comp.description}</p>
-                <div className="flex items-center">
-                  <span className="bg-lavender text-navy text-xs px-3 py-1 rounded-full mr-2">Participare {comp.date.split('-')[2]}</span>
-                  {comp.results && <span className="bg-skyblue text-navy text-xs px-3 py-1 rounded-full">{comp.results}</span>}
+                
+                {/* flex-grow împinge conținutul de sub descriere (data/rezultate) mereu jos */}
+                <p className="text-gray-700 mb-4 flex-grow">{comp.description}</p>
+                
+                <div className="flex flex-wrap items-center gap-2 mt-auto">
+                  <span className="bg-lavender text-navy text-xs px-3 py-1 rounded-full font-medium">Participare: {comp.date}</span>
+                  {comp.results && <span className="bg-skyblue text-navy text-xs px-3 py-1 rounded-full font-medium">{comp.results}</span>}
                 </div>
               </div>
             ))}
           </div>
-          <div className="bg-white p-6 rounded-xl shadow-lg">
-            <h3 className="text-2xl font-bold text-navy mb-6">Competiții Internaționale</h3>
+          
+          {/* SECȚIUNEA INTERNAȚIONALĂ */}
+          <div className="bg-white p-6 rounded-xl shadow-lg flex flex-col gap-6">
+            <h3 className="text-2xl font-bold text-navy border-b pb-2">Competiții Internaționale</h3>
             {internationalComps.map(comp => (
-              <div key={comp.id} className="competition-item border-l-4 border-skyblue pl-4 py-2">
-                <h4 className="text-lg font-semibold text-navy">{comp.name}</h4>
-                <div className="h-32 my-2">
+              <div key={comp.id} className="competition-item border-l-4 border-skyblue pl-4 py-2 flex flex-col">
+                <h4 className="text-lg font-semibold text-navy mb-2">{comp.name}</h4>
+                
+                {/* AM ÎNLOCUIT h-32 cu aspect-video și object-cover */}
+                <div className="w-full aspect-video mb-4 overflow-hidden rounded bg-gray-100 flex items-center justify-center shrink-0">
                   {comp.imageUrl ? (
-                    <img src={comp.imageUrl} alt={comp.name} className="w-full h-full object-cover rounded" />
+                    <img src={comp.imageUrl} alt={comp.name} className="w-full h-full object-cover" />
                   ) : (
-                    <svg className="w-16 h-16 text-navy mx-auto" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg className="w-16 h-16 text-navy opacity-50 mx-auto" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-9h10v2H7z" />
                     </svg>
                   )}
                 </div>
-                <p className="text-gray-700 mb-2">{comp.description}</p>
-                <div className="flex items-center">
-                  <span className="bg-lavender text-navy text-xs px-3 py-1 rounded-full mr-2">Participare {comp.date.split('-')[2]}</span>
-                  {comp.results && <span className="bg-purple text-white text-xs px-3 py-1 rounded-full">{comp.results}</span>}
+                
+                {/* flex-grow împinge conținutul de sub descriere (data/rezultate) mereu jos */}
+                <p className="text-gray-700 mb-4 flex-grow">{comp.description}</p>
+                
+                <div className="flex flex-wrap items-center gap-2 mt-auto">
+                  <span className="bg-lavender text-navy text-xs px-3 py-1 rounded-full font-medium">Participare: {comp.date}</span>
+                  {comp.results && <span className="bg-purple text-white text-xs px-3 py-1 rounded-full font-medium">{comp.results}</span>}
                 </div>
               </div>
             ))}
           </div>
+
         </div>
+        
         {!showAll && (
           <div className="mt-16 text-center">
             <button onClick={() => setShowAll(true)} className="bg-skyblue text-navy px-8 py-3 rounded-lg font-medium hover:bg-opacity-90 transition shadow-lg">
@@ -98,6 +114,7 @@ function Competitions() {
             </button>
           </div>
         )}
+        
         {(showAll || competitions.length > 4) && (
           <div className="mt-16">
             <h3 className="text-2xl font-bold text-navy mb-8 text-center">Calendar Competițional 2024 - 2026</h3>
@@ -105,20 +122,22 @@ function Competitions() {
               <table className="w-full bg-white rounded-xl shadow-lg">
                 <thead>
                   <tr className="bg-navy text-cream">
-                    <th className="py-4 px-6 text-left rounded-tl-xl">Competiție</th>
-                    <th className="py-4 px-6 text-left">Data</th>
-                    <th className="py-4 px-6 text-left">Locație</th>
-                    <th className="py-4 px-6 text-left rounded-tr-xl">Status</th>
+                    <th className="py-4 px-6 text-left rounded-tl-xl whitespace-nowrap">Competiție</th>
+                    <th className="py-4 px-6 text-left whitespace-nowrap">Data</th>
+                    <th className="py-4 px-6 text-left whitespace-nowrap">Locație</th>
+                    <th className="py-4 px-6 text-left rounded-tr-xl whitespace-nowrap">Status</th>
                   </tr>
                 </thead>
                 <tbody>
                   {competitions.map(comp => (
-                    <tr key={comp.id} className="border-b border-gray-200 even:bg-gray-50">
-                      <td className="py-4 px-6">{comp.name}</td>
-                      <td className="py-4 px-6">{comp.date}</td>
-                      <td className="py-4 px-6">{comp.location}</td>
+                    <tr key={comp.id} className="border-b border-gray-200 even:bg-gray-50 hover:bg-gray-100 transition-colors">
+                      <td className="py-4 px-6 font-medium text-gray-800">{comp.name}</td>
+                      <td className="py-4 px-6 text-gray-600">{comp.date}</td>
+                      <td className="py-4 px-6 text-gray-600">{comp.location}</td>
                       <td className="py-4 px-6">
-                        <span className={`text-xs px-3 py-1 rounded-full ${statusClasses[comp.status]}`}>{comp.status}</span>
+                        <span className={`text-xs px-3 py-1 rounded-full font-semibold whitespace-nowrap ${statusClasses[comp.status] || 'bg-gray-100 text-gray-800'}`}>
+                          {comp.status}
+                        </span>
                       </td>
                     </tr>
                   ))}
